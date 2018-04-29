@@ -16,6 +16,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[JPA使用Java8的LocalDateTime]]></title>
+    <url>%2F2017%2F06%2F29%2FJPA%E4%BD%BF%E7%94%A8Java8%E7%9A%84LocalDateTime%2F</url>
+    <content type="text"><![CDATA[前言这篇文章主要介绍JPA如何正确使用LocalDateTime与数据库datetime属性进行映射。 对应的JPA版本是2.1以下的，由于JPA2.1发布时间早于Java8，所以不能直接支持Java8的新特新。Oracle最新发布的JPA2.2版本是支持新的时间API以及查询结果流等。 MyBatis请查看MyBatis使用Java8的LocalDateTime。 解决方法spring-boot-starter-data-jpa的版本为1.5.9.RELEASE，对应的hibernate-core版本为5.0.12.Final 将数据保存到数据库 添加依赖 12345&lt;dependency&gt; &lt;groupId&gt;org.hibernate&lt;/groupId&gt; &lt;artifactId&gt;hibernate-java8&lt;/artifactId&gt; &lt;version&gt;5.0.12.Final&lt;/version&gt;&lt;/dependency&gt; 添加注解，在获取LocalDateTime时，指定时间格式 12345678910public class User &#123; @Id @Column(name = "id", nullable = false, length = 20) private Long id; @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8") @Column(name = "gmt_create") private LocalDateTime gmtCreate; //省略get，set方法&#125; 总结博主一开始遇到了一个坑，我用的hibernate-java8版本为5.2.8.Final，结果报错了。后来发现这个版本的hibernate-core是5.2.8.Final。后来改成对应的5.0.12.Final就正确了。 欢迎关注博主其他的文章。]]></content>
+      <categories>
+        <category>JPA</category>
+      </categories>
+      <tags>
+        <tag>Java8</tag>
+        <tag>JPA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MyBatis使用Java8的LocalDateTime]]></title>
     <url>%2F2017%2F06%2F28%2FMyBatis%E4%BD%BF%E7%94%A8Java8%E7%9A%84LocalDateTime%2F</url>
     <content type="text"><![CDATA[前言众所周知，Java8之前的时间API有很多问题，比如：非线程安全，设计很差。时区处理麻烦。新的时间API（java.time包）解决了这些问题，所以我们在平时开发尽可能的使用新的时间API。但是MyBatis使用LocalDataTime映射到数据库的datetime属性时，会报错。 解决方法mybatis-spring-boot-starter的版本为1.3.1，对应的MyBatis版本为3.4.5（版本低于3.4.0还需要特殊配置） 将数据保存到数据库 添加依赖 12345678910111213&lt;!-- LocalDateTime映射到数据库需要的依赖 --&gt;&lt;dependency&gt; &lt;groupId&gt;org.mybatis&lt;/groupId&gt; &lt;artifactId&gt;mybatis-typehandlers-jsr310&lt;/artifactId&gt; &lt;version&gt;1.0.2&lt;/version&gt;&lt;/dependency&gt;&lt;!-- 格式化LocalDateTime需要的依赖 --&gt;&lt;dependency&gt; &lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt; &lt;artifactId&gt;jackson-datatype-jsr310&lt;/artifactId&gt; &lt;version&gt;2.9.0&lt;/version&gt;&lt;/dependency&gt; 添加注解，设置时间格式 123456public class User &#123; private Integer id; @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8") private LocalDateTime gmtCreate; //省略get，set方法&#125;​ 总结关于MyBatis使用LocalDateTime的内容就是上面这些了，如果使用的ORM框架式JPA，请点击JPA使用Java8的LocalDateTime。 欢迎关注博主其他的文章。]]></content>
@@ -25,18 +37,6 @@
       <tags>
         <tag>MyBatis</tag>
         <tag>Java8</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[JPA使用Java8的LocalDateTime]]></title>
-    <url>%2F2017%2F04%2F29%2FJPA%E4%BD%BF%E7%94%A8Java8%E7%9A%84LocalDateTime%2F</url>
-    <content type="text"><![CDATA[前言这篇文章主要介绍JPA如何正确使用LocalDateTime与数据库datetime属性进行映射。 对应的JPA版本是2.1以下的，由于JPA2.1发布时间早于Java8，所以不能直接支持Java8的新特新。Oracle最新发布的JPA2.2版本是支持新的时间API以及查询结果流等。 MyBatis请查看MyBatis使用Java8的LocalDateTime。 解决方法spring-boot-starter-data-jpa的版本为1.5.9.RELEASE，对应的hibernate-core版本为5.0.12.Final 将数据保存到数据库 添加依赖 12345&lt;dependency&gt; &lt;groupId&gt;org.hibernate&lt;/groupId&gt; &lt;artifactId&gt;hibernate-java8&lt;/artifactId&gt; &lt;version&gt;5.0.12.Final&lt;/version&gt;&lt;/dependency&gt; 添加注解，在获取LocalDateTime时，指定时间格式 12345678910public class User &#123; @Id @Column(name = "id", nullable = false, length = 20) private Long id; @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8") @Column(name = "gmt_create") private LocalDateTime gmtCreate; //省略get，set方法&#125; 总结博主一开始遇到了一个坑，我用的hibernate-java8版本为5.2.8.Final，结果报错了。后来发现这个版本的hibernate-core是5.2.8.Final。后来改成对应的5.0.12.Final就正确了。 欢迎关注博主其他的文章。]]></content>
-      <categories>
-        <category>JPA</category>
-      </categories>
-      <tags>
-        <tag>Java8</tag>
-        <tag>JPA</tag>
       </tags>
   </entry>
 </search>
