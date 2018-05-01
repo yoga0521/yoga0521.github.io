@@ -124,13 +124,21 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="yoga&#39;s blog">
-<meta property="og:url" content="https://yoga0521.github.io/index.html">
+  <meta name="description" content="前言2017年微服务变得很火热， Eureka项目结构简介 eureka-core包 com.netflix.eureka.cluster : 与peer节点复制(replication)相关  com.netflix.eureka.lease : 租约, 用来控制注册信息的生命周期(注册、续约、剔除)  com.netflix.eureka.registry : 存储、查询服务注册信息  com">
+<meta name="keywords" content="Eureka,SpringCloud,微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EurekaClient">
+<meta property="og:url" content="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
+<meta property="og:description" content="前言2017年微服务变得很火热， Eureka项目结构简介 eureka-core包 com.netflix.eureka.cluster : 与peer节点复制(replication)相关  com.netflix.eureka.lease : 租约, 用来控制注册信息的生命周期(注册、续约、剔除)  com.netflix.eureka.registry : 存储、查询服务注册信息  com">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/Eureka%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png">
+<meta property="og:image" content="https://github.com/yoga0521/picture/raw/master/Eureka/MyDataCenterInstanceConfig%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-05-01T16:19:28.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yoga&#39;s blog">
+<meta name="twitter:title" content="EurekaClient">
+<meta name="twitter:description" content="前言2017年微服务变得很火热， Eureka项目结构简介 eureka-core包 com.netflix.eureka.cluster : 与peer节点复制(replication)相关  com.netflix.eureka.lease : 租约, 用来控制注册信息的生命周期(注册、续约、剔除)  com.netflix.eureka.registry : 存储、查询服务注册信息  com">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/Eureka%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png">
 
 
 
@@ -139,7 +147,7 @@
 
 
 
-  <link rel="canonical" href="https://yoga0521.github.io/"/>
+  <link rel="canonical" href="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/"/>
 
 
 
@@ -149,7 +157,7 @@
   };
 </script>
 
-  <title>yoga's blog</title>
+  <title>EurekaClient | yoga's blog</title>
   
 
 
@@ -205,8 +213,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,7 +253,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
@@ -356,9 +363,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -390,11 +397,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/21/EurekaClient源码分析/" itemprop="url">
-                  EurekaClient
-                </a>
+          <h1 class="post-title" itemprop="name headline">EurekaClient
               
             
           </h1>
@@ -491,6 +494,15 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-thermometer-three-quarters"></i>
+             热度： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            <span>℃</span>
+            </span>
+          
 
           
 
@@ -509,9 +521,7 @@
       
 
       
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2017年微服务变得很火热，</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2017年微服务变得很火热，</p>
 <h2 id="Eureka项目结构简介"><a href="#Eureka项目结构简介" class="headerlink" title="Eureka项目结构简介"></a>Eureka项目结构简介</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/Eureka%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png" alt="Eureka项目结构图"></p>
 <h3 id="eureka-core包"><a href="#eureka-core包" class="headerlink" title="eureka-core包"></a>eureka-core包</h3><ol>
 <li><code>com.netflix.eureka.cluster</code> : 与peer节点复制(replication)相关 </li>
@@ -583,8 +593,6 @@
 <li>使用DNS获取ServiceUrls</li>
 </ul>
 <h2 id="Di"><a href="#Di" class="headerlink" title="Di"></a>Di</h2>
-          
-        
       
     </div>
 
@@ -596,11 +604,83 @@
 
     <!-- 将标签提前 -->
     
-
+      <div class="post-tags">
+        
+          <a href="/tags/Eureka/" rel="tag"><i class="fa fa-tag"></i> Eureka</a>
+        
+          <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i> SpringCloud</a>
+        
+          <a href="/tags/微服务/" rel="tag"><i class="fa fa-tag"></i> 微服务</a>
+        
+      </div>
     
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="yoga 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="yoga 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/03/21/EurekaClient源码分析/">EurekaClient</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
+  <p><span>发布时间:</span>2018年03月21日 - 20:03</p>
+  <p><span>最后更新:</span>2018年05月02日 - 00:05</p>
+  <p><span>原始链接:</span><a href="/2018/03/21/EurekaClient源码分析/" title="EurekaClient">https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)">CC BY-NC-SA 4.0</a> 许可协议。 转载请注明出处！</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      </div>
     
 
     
@@ -608,205 +688,28 @@
     <footer class="post-footer">
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/12/02/JPA使用Java8的LocalDateTime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/02/JPA使用Java8的LocalDateTime/" itemprop="url">
-                  JPA使用Java8的LocalDateTime
-                </a>
-              
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+              <a href="/2017/12/02/JPA使用Java8的LocalDateTime/" rel="next" title="JPA使用Java8的LocalDateTime">
+                <i class="fa fa-chevron-left"></i> JPA使用Java8的LocalDateTime
+              </a>
             
-                
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-02T22:49:03+08:00">2017-12-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JPA/" itemprop="url" rel="index"><span itemprop="name">JPA</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/02/JPA使用Java8的LocalDateTime/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/12/02/JPA使用Java8的LocalDateTime/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">287</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇文章主要介绍JPA如何正确使用<code>LocalDateTime</code>与数据库<code>datetime</code>属性进行映射。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/02/JPA使用Java8的LocalDateTime/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -816,207 +719,24 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/12/01/MyBatis使用Java8的LocalDateTime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/01/MyBatis使用Java8的LocalDateTime/" itemprop="url">
-                  MyBatis使用Java8的LocalDateTime
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T21:42:15+08:00">2017-12-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MyBatis/" itemprop="url" rel="index"><span itemprop="name">MyBatis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/01/MyBatis使用Java8的LocalDateTime/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/12/01/MyBatis使用Java8的LocalDateTime/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">294</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知，Java8之前的时间API有很多问题，比如：<strong>非线程安全</strong>，<strong>设计很差</strong>。<strong>时区处理麻烦</strong>。新的时间API（<code>java.time</code>包）解决了这些问题，所以我们在平时开发尽可能的使用新的时间API。但是MyBatis使用<code>LocalDataTime</code>映射到数据库的<code>datetime</code>属性时，会报错。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/01/MyBatis使用Java8的LocalDateTime/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -1039,8 +759,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1157,6 +886,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka项目结构简介"><span class="nav-number">2.</span> <span class="nav-text">Eureka项目结构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-core包"><span class="nav-number">2.1.</span> <span class="nav-text">eureka-core包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaInstanceConfig"><span class="nav-number">3.</span> <span class="nav-text">EurekaInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-EurekaInstanceConfig简介"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 EurekaInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-EurekaInstanceConfig源码"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 EurekaInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-EurekaInstanceConfig重要属性或者重要方法"><span class="nav-number">3.3.</span> <span class="nav-text">1.3 EurekaInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractInstanceConfig"><span class="nav-number">4.</span> <span class="nav-text">AbstractInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-AbstractInstanceConfig简介"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 AbstractInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-AbstractInstanceConfig源码"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 AbstractInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-AbstractInstanceConfig重要属性或者重要方法"><span class="nav-number">4.3.</span> <span class="nav-text">2.3 AbstractInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PropertiesInstanceConfig"><span class="nav-number">5.</span> <span class="nav-text">PropertiesInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PropertiesInstanceConfig简介"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 PropertiesInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-PropertiesInstanceConfig源码"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 PropertiesInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-PropertiesInstanceConfig重要属性或者重要方法"><span class="nav-number">5.3.</span> <span class="nav-text">3.3 PropertiesInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyDataCenterInstanceConfig"><span class="nav-number">6.</span> <span class="nav-text">MyDataCenterInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-MyDataCenterInstanceConfig简介"><span class="nav-number">6.1.</span> <span class="nav-text">4.1 MyDataCenterInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-MyDataCenterInstanceConfig源码"><span class="nav-number">6.2.</span> <span class="nav-text">4.2 MyDataCenterInstanceConfig源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstanceInfo"><span class="nav-number">7.</span> <span class="nav-text">InstanceInfo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-InstanceInfo简介"><span class="nav-number">7.1.</span> <span class="nav-text">5.1 InstanceInfo简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-EurekaConfigBasedInstanceInfoProvider源码"><span class="nav-number">7.2.</span> <span class="nav-text">5.2 EurekaConfigBasedInstanceInfoProvider源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法"><span class="nav-number">7.3.</span> <span class="nav-text">5.3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationInfoManager"><span class="nav-number">8.</span> <span class="nav-text">ApplicationInfoManager</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-ApplicationInfoManager简介"><span class="nav-number">8.1.</span> <span class="nav-text">6.1 ApplicationInfoManager简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-ApplicationInfoManager源码"><span class="nav-number">8.2.</span> <span class="nav-text">6.2 ApplicationInfoManager源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaClientConfig"><span class="nav-number">9.</span> <span class="nav-text">EurekaClientConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-EurekaClientConfig简介"><span class="nav-number">9.1.</span> <span class="nav-text">7.1 EurekaClientConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-EurekaClientConfig源码"><span class="nav-number">9.2.</span> <span class="nav-text">7.2 EurekaClientConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-EurekaClientConfig重要属性或者重要方法"><span class="nav-number">9.3.</span> <span class="nav-text">7.3 EurekaClientConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Di"><span class="nav-number">10.</span> <span class="nav-text">Di</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1337,6 +1082,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
 
   
 
@@ -1356,6 +1105,8 @@
 
 		_hcwp.push({widget:"Bloggerstream", widget_id: 104196, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
+		
+		_hcwp.push({widget:"Stream", widget_id: 104196, xid: "2018/03/21/EurekaClient源码分析/"});
 		
 
 		(function() {
@@ -1721,14 +1472,6 @@
 
   
   
-    
-      
-    
-      
-    
-      
-    
-  
 
   
 
@@ -1748,7 +1491,7 @@
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script type="text/javascript">
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#more");
   
   </script>
 
