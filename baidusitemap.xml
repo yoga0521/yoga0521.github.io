@@ -5,11 +5,38 @@
     
   <url>
     <loc>https://yoga0521.github.io/2018/03/21/EurekaClient%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2018-05-01T16:19:28.437Z</lastmod>
+    <lastmod>2018-05-02T13:42:59.896Z</lastmod>
     <data>
         <display>
         <title>EurekaClient</title>
         <pubTime>2018-03-21T12:19:14.000Z</pubTime>
+        
+        <tag>Eureka</tag>
+         
+        <tag>SpringCloud</tag>
+         
+        <tag>微服务</tag>
+         
+         
+           
+             
+              <breadCrumb title="SpringCloud" url="https://yoga0521.github.io/categories/SpringCloud/"/>
+          
+             
+              <breadCrumb title="Eureka" url="https://yoga0521.github.io/categories/SpringCloud/Eureka/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yoga0521.github.io/2018/03/18/Eureka%E6%BA%90%E7%A0%81%E7%B3%BB%E5%88%97%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2018-05-02T13:40:22.986Z</lastmod>
+    <data>
+        <display>
+        <title>Eureka源码系列简介</title>
+        <pubTime>2018-03-18T12:46:22.000Z</pubTime>
         
         <tag>Eureka</tag>
          
