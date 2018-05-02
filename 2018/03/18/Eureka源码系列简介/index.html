@@ -133,7 +133,7 @@
 <meta property="og:description" content="前言最近关于微服务的话题很火热，本系列文章主要是从源码去解读Eureka。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/Eureka%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png">
-<meta property="og:updated_time" content="2018-05-02T13:40:22.986Z">
+<meta property="og:updated_time" content="2018-05-02T15:08:25.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eureka源码系列简介">
 <meta name="twitter:description" content="前言最近关于微服务的话题很火热，本系列文章主要是从源码去解读Eureka。">
@@ -474,7 +474,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">294</span>
+                    <span class="post-count">533</span>
                     
                   </span>
               
@@ -484,7 +484,7 @@
                       <i class="fa fa-clock-o"></i>
                     </span>
                     <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
+                    <span class="post-count">2min</span>
                     
                   </span>
           <!--以上部分为：字数统计、阅读时长插入代码-->
@@ -531,16 +531,26 @@
 </ol>
 <h2 id="Eureka项目结构简介"><a href="#Eureka项目结构简介" class="headerlink" title="Eureka项目结构简介"></a>Eureka项目结构简介</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/Eureka%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png" alt="Eureka项目结构图"></p>
 <h3 id="eureka-client"><a href="#eureka-client" class="headerlink" title="eureka-client"></a>eureka-client</h3><ol>
-<li><code>com.netflix.appinfo</code> : Eureka-Client的应用配置，</li>
+<li><code>com.netflix.appinfo</code> : Eureka-Client 的应用配置</li>
+<li><code>com.netflix.discovery</code> : Eureka-Client 的注册和发现功能</li>
 </ol>
+<h3 id="eureka-client-archaius2"><a href="#eureka-client-archaius2" class="headerlink" title="eureka-client-archaius2"></a>eureka-client-archaius2</h3><p>Archaius是 Netflix 开源的配置管理组件。Eureka 使用 1.x 版本，2.x 版本仍然在开发中，2.x只兼容jdk1.8以上的版本。</p>
+<h3 id="eureka-client-jersey2"><a href="#eureka-client-jersey2" class="headerlink" title="eureka-client-jersey2"></a>eureka-client-jersey2</h3><p>Jersey 框架实现Eureka的 RESTful HTTP接口。Eureka 使用 1.x 版本，2.x 版本由社区实现。</p>
 <h3 id="eureka-core"><a href="#eureka-core" class="headerlink" title="eureka-core"></a>eureka-core</h3><ol>
-<li><code>com.netflix.eureka.cluster</code> : 与peer节点复制(replication)相关 </li>
+<li><code>com.netflix.eureka.aws</code> : 与AWS (Amazon Web Services) 相关，该系列文章暂不涉及AWS的分析</li>
+<li><code>com.netflix.eureka.cluster</code> : 与peer节点复制(replication)相关</li>
 <li><code>com.netflix.eureka.lease</code> : 租约，用来控制注册信息的生命周期(注册、续约、剔除) </li>
 <li><code>com.netflix.eureka.registry</code> : 存储、查询服务注册信息 </li>
 <li><code>com.netflix.eureka.resources</code> : RESTful中的”R”，即资源。相当于SpringMVC中的Controller </li>
 <li><code>com.netflix.eureka.transport</code> : 发送HTTP请求的客户端，如发送心跳 </li>
-<li><code>com.netflix.eureka.aws</code> : 与AWS (Amazon Web Services) 相关，这系列文章暂不涉及AWS的分析</li>
+<li><code>com.netflix.eureka.util</code> : 相关工具包</li>
 </ol>
+<h3 id="eureka-core-jersey2"><a href="#eureka-core-jersey2" class="headerlink" title="eureka-core-jersey2"></a>eureka-core-jersey2</h3><p>Jersey 框架实现Eureka的 RESTful HTTP接口。Eureka 使用 1.x 版本，2.x 版本由社区实现。</p>
+<h3 id="eureka-examples"><a href="#eureka-examples" class="headerlink" title="eureka-examples"></a>eureka-examples</h3><p>Eureka-Client 使用例子。</p>
+<h3 id="eureka-resources"><a href="#eureka-resources" class="headerlink" title="eureka-resources"></a>eureka-resources</h3><p>通过 JSP 实现 Eureka-Server 的运维后台界面。</p>
+<h3 id="eureka-server"><a href="#eureka-server" class="headerlink" title="eureka-server"></a>eureka-server</h3><p>由 <code>eureka-client</code> + <code>eureka-core</code> + <code>eureka-resources</code> 打包成 Eureka-Server 的war包。</p>
+<h3 id="eureka-server-governator"><a href="#eureka-server-governator" class="headerlink" title="eureka-server-governator"></a>eureka-server-governator</h3><p>使用 Netflix Governator （Google Guice的扩展类库，提供了Classpath扫描及自动绑定、生命周期管理、成员属性验证等功能）管理 Eureka-Server 的生命周期。目前该模块正在测试阶段。</p>
+<h3 id="eureka-test-utils"><a href="#eureka-test-utils" class="headerlink" title="eureka-test-utils"></a>eureka-test-utils</h3><p>Eureka 单元测试工具类。</p>
 
       
     </div>
@@ -609,7 +619,7 @@
   <p><span>本文标题:</span><a href="/2018/03/18/Eureka源码系列简介/">Eureka源码系列简介</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2018年03月18日 - 20:03</p>
-  <p><span>最后更新:</span>2018年05月02日 - 21:05</p>
+  <p><span>最后更新:</span>2018年05月02日 - 23:05</p>
   <p><span>原始链接:</span><a href="/2018/03/18/Eureka源码系列简介/" title="Eureka源码系列简介">https://yoga0521.github.io/2018/03/18/Eureka源码系列简介/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/18/Eureka源码系列简介/"  aria-label="复制成功！"></i></span>
   </p>
@@ -849,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka项目结构简介"><span class="nav-number">2.</span> <span class="nav-text">Eureka项目结构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-client"><span class="nav-number">2.1.</span> <span class="nav-text">eureka-client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-core"><span class="nav-number">2.2.</span> <span class="nav-text">eureka-core</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka项目结构简介"><span class="nav-number">2.</span> <span class="nav-text">Eureka项目结构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-client"><span class="nav-number">2.1.</span> <span class="nav-text">eureka-client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-client-archaius2"><span class="nav-number">2.2.</span> <span class="nav-text">eureka-client-archaius2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-client-jersey2"><span class="nav-number">2.3.</span> <span class="nav-text">eureka-client-jersey2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-core"><span class="nav-number">2.4.</span> <span class="nav-text">eureka-core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-core-jersey2"><span class="nav-number">2.5.</span> <span class="nav-text">eureka-core-jersey2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-examples"><span class="nav-number">2.6.</span> <span class="nav-text">eureka-examples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-resources"><span class="nav-number">2.7.</span> <span class="nav-text">eureka-resources</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-server"><span class="nav-number">2.8.</span> <span class="nav-text">eureka-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-server-governator"><span class="nav-number">2.9.</span> <span class="nav-text">eureka-server-governator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eureka-test-utils"><span class="nav-number">2.10.</span> <span class="nav-text">eureka-test-utils</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -918,7 +928,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 2.2k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 2.5k 字</i>
     </span>
 </div>
 
