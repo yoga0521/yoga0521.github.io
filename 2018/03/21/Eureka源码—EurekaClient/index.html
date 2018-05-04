@@ -128,12 +128,12 @@
 <meta name="keywords" content="Eureka,SpringCloud,微服务">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EurekaClient">
-<meta property="og:url" content="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/index.html">
+<meta property="og:url" content="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
 <meta property="og:description" content="前言本篇文章主要解读Eureka-Client的相关源码，文章较长，请谨慎点击！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/yoga0521/picture/raw/master/Eureka/MyDataCenterInstanceConfig%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-05-02T13:42:59.896Z">
+<meta property="og:updated_time" content="2018-05-04T14:43:11.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EurekaClient">
 <meta name="twitter:description" content="前言本篇文章主要解读Eureka-Client的相关源码，文章较长，请谨慎点击！">
@@ -146,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/"/>
+  <link rel="canonical" href="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/"/>
 
 
 
@@ -379,7 +379,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/">
+    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yoga">
@@ -459,8 +459,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/21/EurekaClient源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/21/EurekaClient源码分析/" itemprop="commentsCount"></span>
+                <a href="/2018/03/21/Eureka源码—EurekaClient/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/21/Eureka源码—EurekaClient/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -474,7 +474,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">1,354</span>
+                    <span class="post-count">1,854</span>
                     
                   </span>
               
@@ -484,7 +484,7 @@
                       <i class="fa fa-clock-o"></i>
                     </span>
                     <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">6min</span>
+                    <span class="post-count">8min</span>
                     
                   </span>
           <!--以上部分为：字数统计、阅读时长插入代码-->
@@ -578,12 +578,40 @@
 <h2 id="ApplicationInfoManager"><a href="#ApplicationInfoManager" class="headerlink" title="ApplicationInfoManager"></a>ApplicationInfoManager</h2><h3 id="6-1-ApplicationInfoManager简介"><a href="#6-1-ApplicationInfoManager简介" class="headerlink" title="6.1 ApplicationInfoManager简介"></a>6.1 ApplicationInfoManager简介</h3><p>所属包：<code>com.netflix.appinfo.ApplicationInfoManager</code>，<strong>应用信息管理类</strong>，由<code>InstanceInfo</code>和<code>EurekaInstanceConfig</code>生成。</p>
 <h3 id="6-2-ApplicationInfoManager源码"><a href="#6-2-ApplicationInfoManager源码" class="headerlink" title="6.2 ApplicationInfoManager源码"></a>6.2 ApplicationInfoManager源码</h3><p>博主已添加中文注释，<a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/ApplicationInfoManager.java" target="_blank" rel="noopener">点击查看</a>。</p>
 <h2 id="EurekaClientConfig"><a href="#EurekaClientConfig" class="headerlink" title="EurekaClientConfig"></a>EurekaClientConfig</h2><h3 id="7-1-EurekaClientConfig简介"><a href="#7-1-EurekaClientConfig简介" class="headerlink" title="7.1 EurekaClientConfig简介"></a>7.1 EurekaClientConfig简介</h3><p>所属包：<code>com.netflix.discovery.EurekaClientConfig</code>，获取连接的 Eureka-Server 的地址、获取服务提供者列表的频率、注册自身为服务提供者的频率等等。</p>
-<h3 id="7-2-EurekaClientConfig源码"><a href="#7-2-EurekaClientConfig源码" class="headerlink" title="7.2 EurekaClientConfig源码"></a>7.2 EurekaClientConfig源码</h3><p><a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java" target="_blank" rel="noopener">点击查看</a> </p>
+<h3 id="7-2-EurekaClientConfig源码"><a href="#7-2-EurekaClientConfig源码" class="headerlink" title="7.2 EurekaClientConfig源码"></a>7.2 EurekaClientConfig源码</h3><p>博主已添加中文注释，<a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java" target="_blank" rel="noopener">点击查看</a>。</p>
 <h3 id="7-3-EurekaClientConfig重要属性或者重要方法"><a href="#7-3-EurekaClientConfig重要属性或者重要方法" class="headerlink" title="7.3 EurekaClientConfig重要属性或者重要方法"></a>7.3 EurekaClientConfig重要属性或者重要方法</h3><ul>
 <li><code>getRegion()</code>，<code>getAvailabilityZones()</code>：region和zone（或者Availability Zone）均是AWS的概念。在非AWS环境下，我们可以简单地将region理解为Eureka集群，zone理解成机房。Spring Cloud中默认的region是us-east-1 。具体可查看<a href="http://www.itmuch.com/spring-cloud-1/?from=www.iocoder.cn" target="_blank" rel="noopener">《周立 —— Region、Zone解析》</a>。</li>
-<li>使用DNS获取ServiceUrls</li>
+<li><code>getEurekaServerServiceUrls()</code>：获取Eureka-Server的Url集合</li>
+<li>从Eureka-Server获取注册信息的相关方法：<ul>
+<li><code>getRegistryFetchIntervalSeconds()</code>：获取注册信息的时间间隔，单位为秒。默认为30s</li>
+<li><code>getEurekaServiceUrlPollIntervalSeconds()</code>：向Eureka-Server获取Eureka服务地址的变化时间间隔，单位为秒。默认为 5 <em> 60 </em> 1000 s</li>
+<li><code>getEurekaServerReadTimeoutSeconds()</code>：获取Eureka-Server读取超时时间，单位为秒。默认为8s</li>
+<li><code>getBackupRegistryImpl()</code>：获取备份注册中心实现类。默认为null</li>
+<li><code>shouldPreferSameZoneEureka()</code>：相同Zone的Eureka是否优先。默认为true</li>
+<li><code>shouldDisableDelta()</code>：是否使用增量形式获取注册信息。默认为false</li>
+<li><code>fetchRegistryForRemoteRegions()</code>：获取远程区域的注册信息。默认为null</li>
+<li><code>shouldFilterOnlyUpInstances()</code>：是否只获取Up（启动）状态的实例。默认为true</li>
+<li><code>shouldFetchRegistry()</code>：是否从Eureka-Server获取注册信息。默认为true</li>
+<li><code>getRegistryRefreshSingleVipAddress()</code>：获取单个vip地址（虚拟IP地址）的注册信息。默认为null</li>
+<li><code>getCacheRefreshExecutorThreadPoolSize()</code>：获取注册信息缓存刷新的线程池大小。默认为5</li>
+<li><code>getCacheRefreshExecutorExponentialBackOffBound()</code>：获取注册信息缓存刷新执行超时后的延迟重试时间的最大倍数。默认为10</li>
 </ul>
-<h2 id="Di"><a href="#Di" class="headerlink" title="Di"></a>Di</h2>
+</li>
+<li>向Eureka-Server注册自身服务的相关方法：<ul>
+<li><code>getInstanceInfoReplicationIntervalSeconds()</code>：获取向Eureka-Server同步实例信息的时间间隔，单位为秒。默认为30s</li>
+<li><code>getInitialInstanceInfoReplicationIntervalSeconds()</code>：获取最初向Eureka-Server同步实例信息的时间间隔，单位为秒。默认为40s</li>
+<li><code>getEurekaServerConnectTimeoutSeconds()</code>：获取Eureka-Server连接超时时间，单位为秒。默认为5s</li>
+<li><code>shouldRegisterWithEureka()</code>：是否向Eureka-Server注册自身服务。默认为true</li>
+<li><code>shouldUnregisterOnShutdown()</code>：当Eureka-Server关闭的时候，是否注销自己的服务。默认为true</li>
+<li><code>getHeartbeatExecutorThreadPoolSize()</code>：获取心跳检测执行的线程池大小。默认为5</li>
+<li><code>getHeartbeatExecutorExponentialBackOffBound()</code>：获取心跳检测执行超时后的延迟重试时间的最大倍数。默认为10</li>
+<li><code>shouldEnforceRegistrationAtInit()</code>：是否在实例初始化的时候进行注册。默认为false</li>
+</ul>
+</li>
+</ul>
+<h2 id="DefaultEurekaClientConfig"><a href="#DefaultEurekaClientConfig" class="headerlink" title="DefaultEurekaClientConfig"></a>DefaultEurekaClientConfig</h2><h3 id="8-1-DefaultEurekaClientConfig简介"><a href="#8-1-DefaultEurekaClientConfig简介" class="headerlink" title="8.1 DefaultEurekaClientConfig简介"></a>8.1 DefaultEurekaClientConfig简介</h3><p>所属包：<code>com.netflix.discovery.DefaultEurekaClientConfig</code>，<strong>基于配置文件的Eureka-Client配置实现类</strong>。</p>
+<h3 id="8-2-DefaultEurekaClientConfig源码"><a href="#8-2-DefaultEurekaClientConfig源码" class="headerlink" title="8.2 DefaultEurekaClientConfig源码"></a>8.2 DefaultEurekaClientConfig源码</h3><p>博主已添加中文注释，<a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/DefaultEurekaClientConfig.java" target="_blank" rel="noopener">点击查看</a>。</p>
+
       
     </div>
 
@@ -648,12 +676,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/03/21/EurekaClient源码分析/">EurekaClient</a></p>
+  <p><span>本文标题:</span><a href="/2018/03/21/Eureka源码—EurekaClient/">EurekaClient</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2018年03月21日 - 20:03</p>
-  <p><span>最后更新:</span>2018年05月02日 - 21:05</p>
-  <p><span>原始链接:</span><a href="/2018/03/21/EurekaClient源码分析/" title="EurekaClient">https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/21/EurekaClient源码分析/"  aria-label="复制成功！"></i></span>
+  <p><span>最后更新:</span>2018年05月04日 - 22:05</p>
+  <p><span>原始链接:</span><a href="/2018/03/21/Eureka源码—EurekaClient/" title="EurekaClient">https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)">CC BY-NC-SA 4.0</a> 许可协议。 转载请注明出处！</p>  
 </div>
@@ -887,7 +915,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaInstanceConfig"><span class="nav-number">2.</span> <span class="nav-text">EurekaInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-EurekaInstanceConfig简介"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 EurekaInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-EurekaInstanceConfig源码"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 EurekaInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-EurekaInstanceConfig重要属性或者重要方法"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 EurekaInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractInstanceConfig"><span class="nav-number">3.</span> <span class="nav-text">AbstractInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-AbstractInstanceConfig简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 AbstractInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-AbstractInstanceConfig源码"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 AbstractInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-AbstractInstanceConfig重要属性或者重要方法"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 AbstractInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PropertiesInstanceConfig"><span class="nav-number">4.</span> <span class="nav-text">PropertiesInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PropertiesInstanceConfig简介"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PropertiesInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-PropertiesInstanceConfig源码"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 PropertiesInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-PropertiesInstanceConfig重要属性或者重要方法"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 PropertiesInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyDataCenterInstanceConfig"><span class="nav-number">5.</span> <span class="nav-text">MyDataCenterInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-MyDataCenterInstanceConfig简介"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 MyDataCenterInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-MyDataCenterInstanceConfig源码"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 MyDataCenterInstanceConfig源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstanceInfo"><span class="nav-number">6.</span> <span class="nav-text">InstanceInfo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-InstanceInfo简介"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 InstanceInfo简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-EurekaConfigBasedInstanceInfoProvider源码"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 EurekaConfigBasedInstanceInfoProvider源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法"><span class="nav-number">6.3.</span> <span class="nav-text">5.3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationInfoManager"><span class="nav-number">7.</span> <span class="nav-text">ApplicationInfoManager</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-ApplicationInfoManager简介"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 ApplicationInfoManager简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-ApplicationInfoManager源码"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 ApplicationInfoManager源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaClientConfig"><span class="nav-number">8.</span> <span class="nav-text">EurekaClientConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-EurekaClientConfig简介"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 EurekaClientConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-EurekaClientConfig源码"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 EurekaClientConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-EurekaClientConfig重要属性或者重要方法"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 EurekaClientConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Di"><span class="nav-number">9.</span> <span class="nav-text">Di</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaInstanceConfig"><span class="nav-number">2.</span> <span class="nav-text">EurekaInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-EurekaInstanceConfig简介"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 EurekaInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-EurekaInstanceConfig源码"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 EurekaInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-EurekaInstanceConfig重要属性或者重要方法"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 EurekaInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractInstanceConfig"><span class="nav-number">3.</span> <span class="nav-text">AbstractInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-AbstractInstanceConfig简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 AbstractInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-AbstractInstanceConfig源码"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 AbstractInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-AbstractInstanceConfig重要属性或者重要方法"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 AbstractInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PropertiesInstanceConfig"><span class="nav-number">4.</span> <span class="nav-text">PropertiesInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PropertiesInstanceConfig简介"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PropertiesInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-PropertiesInstanceConfig源码"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 PropertiesInstanceConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-PropertiesInstanceConfig重要属性或者重要方法"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 PropertiesInstanceConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyDataCenterInstanceConfig"><span class="nav-number">5.</span> <span class="nav-text">MyDataCenterInstanceConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-MyDataCenterInstanceConfig简介"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 MyDataCenterInstanceConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-MyDataCenterInstanceConfig源码"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 MyDataCenterInstanceConfig源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstanceInfo"><span class="nav-number">6.</span> <span class="nav-text">InstanceInfo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-InstanceInfo简介"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 InstanceInfo简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-EurekaConfigBasedInstanceInfoProvider源码"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 EurekaConfigBasedInstanceInfoProvider源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法"><span class="nav-number">6.3.</span> <span class="nav-text">5.3EurekaConfigBasedInstanceInfoProvider重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationInfoManager"><span class="nav-number">7.</span> <span class="nav-text">ApplicationInfoManager</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-ApplicationInfoManager简介"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 ApplicationInfoManager简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-ApplicationInfoManager源码"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 ApplicationInfoManager源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EurekaClientConfig"><span class="nav-number">8.</span> <span class="nav-text">EurekaClientConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-EurekaClientConfig简介"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 EurekaClientConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-EurekaClientConfig源码"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 EurekaClientConfig源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-EurekaClientConfig重要属性或者重要方法"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 EurekaClientConfig重要属性或者重要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultEurekaClientConfig"><span class="nav-number">9.</span> <span class="nav-text">DefaultEurekaClientConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-DefaultEurekaClientConfig简介"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 DefaultEurekaClientConfig简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-DefaultEurekaClientConfig源码"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 DefaultEurekaClientConfig源码</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -956,7 +984,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 2.5k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 3.0k 字</i>
     </span>
 </div>
 
@@ -1097,7 +1125,7 @@
 		_hcwp.push({widget:"Bloggerstream", widget_id: 104196, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
 		
-		_hcwp.push({widget:"Stream", widget_id: 104196, xid: "2018/03/21/EurekaClient源码分析/"});
+		_hcwp.push({widget:"Stream", widget_id: 104196, xid: "2018/03/21/Eureka源码—EurekaClient/"});
 		
 
 		(function() {
