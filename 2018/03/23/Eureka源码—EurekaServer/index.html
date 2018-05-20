@@ -133,7 +133,7 @@
 <meta property="og:description" content="前言本篇文章主要解读Eureka-Server初始化的相关源码，文章较长，请谨慎点击！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/EurekaBootStrap.png">
-<meta property="og:updated_time" content="2018-05-19T15:56:00.687Z">
+<meta property="og:updated_time" content="2018-05-20T09:57:26.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eureka源码—EurekaServer">
 <meta name="twitter:description" content="前言本篇文章主要解读Eureka-Server初始化的相关源码，文章较长，请谨慎点击！">
@@ -528,14 +528,14 @@
 <li>自我保护相关：<ul>
 <li><code>shouldEnableSelfPreservation()</code>：是否开启自我保护机制，默认为true。</li>
 <li><code>getRenewalPercentThreshold()</code>：自我保护百分比阈值，超过这个值就会开启自我保护模式。默认为0.85。</li>
-<li><code>getRenewalThresholdUpdateIntervalMs（）</code>:自我保护阈值更新的时间间隔，单位为毫秒（ms）。默认为 15 <em> 60 </em> 1000 ms。</li>
+<li><code>getRenewalThresholdUpdateIntervalMs（）</code>:自我保护阈值更新的时间间隔，单位为毫秒（ms）。默认为 15 * 60 * 1000 ms。</li>
 </ul>
 </li>
 <li>注册信息相关：<ul>
-<li><code>getWaitTimeInMsWhenSyncEmpty()</code>：如果eureka在启动的时候，获取不到注册信息，就等待。单位为毫秒（ms）。默认为 1000 <em>  60  </em> 5 ms。</li>
+<li><code>getWaitTimeInMsWhenSyncEmpty()</code>：如果eureka在启动的时候，获取不到注册信息，就等待。单位为毫秒（ms）。默认为 1000 *  60  * 5 ms。</li>
 <li><code>getPeerNodeConnectTimeoutMs()</code>：eureka集群节点之间请求连接超时的时间（进行复制信息操作），单位为毫秒（ms）。默认为 1000 ms。</li>
 <li><code>getPeerNodeReadTimeoutMs()</code>：eureka集群节点之间请求读取超时的时间（进行复制信息操作），单位为毫秒（ms），默认为 5000 ms。</li>
-<li><code>getRetentionTimeInMSInDeltaQueue()</code>：获取增量信息缓存的时间，以避免客户端检索的时候丢失，单位为毫秒。默认为 30 <em> 60 </em> 1000 ms。</li>
+<li><code>getRetentionTimeInMSInDeltaQueue()</code>：获取增量信息缓存的时间，以避免客户端检索的时候丢失，单位为毫秒。默认为 30 * 60 * 1000 ms。</li>
 <li><code>getDeltaRetentionTimerIntervalInMs()</code>：获取清理过期的增量信息任务应唤醒的时间间隔，单位为毫秒。默认为 30 * 1000 ms。</li>
 <li><code>shouldDisableDelta()</code>：是否可以将增量信息提供给客户端，默认为false。</li>
 <li><code>shouldSyncWhenTimestampDiffers()</code>：否同步应用实例信息，当应用实例信息最后更新时间戳( lastDirtyTimestamp )发生改变。默认为true。</li>
@@ -665,7 +665,7 @@
   <p><span>本文标题:</span><a href="/2018/03/23/Eureka源码—EurekaServer/">Eureka源码—EurekaServer</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2018年03月23日 - 20:03</p>
-  <!-- <p><span>最后更新:</span>2018年05月19日 - 23:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年05月20日 - 17:05</p> -->
   <p><span>原始链接:</span><a href="/2018/03/23/Eureka源码—EurekaServer/" title="Eureka源码—EurekaServer">https://yoga0521.github.io/2018/03/23/Eureka源码—EurekaServer/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/23/Eureka源码—EurekaServer/"  aria-label="复制成功！"></i></span>
   </p>
@@ -797,7 +797,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -820,7 +820,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -847,7 +851,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -978,7 +984,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 7.0k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 10.2k 字</i>
     </span>
 </div>
 

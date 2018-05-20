@@ -134,7 +134,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/MyDataCenterInstanceConfig%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Eureka/DiscoveryClient.png">
-<meta property="og:updated_time" content="2018-05-06T12:17:53.725Z">
+<meta property="og:updated_time" content="2018-05-20T09:56:03.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eureka源码—EurekaClient">
 <meta name="twitter:description" content="前言本篇文章主要解读Eureka-Client初始化的相关源码，文章较长，请谨慎点击！">
@@ -587,7 +587,7 @@
 <li><code>getEurekaServerServiceUrls()</code>：获取Eureka-Server的Url集合</li>
 <li>从Eureka-Server获取注册信息的相关方法：<ul>
 <li><code>getRegistryFetchIntervalSeconds()</code>：获取注册信息的时间间隔，单位为秒。默认为30s</li>
-<li><code>getEurekaServiceUrlPollIntervalSeconds()</code>：向Eureka-Server获取Eureka服务地址的变化时间间隔，单位为秒。默认为 5 <em> 60 </em> 1000 s</li>
+<li><code>getEurekaServiceUrlPollIntervalSeconds()</code>：向Eureka-Server获取Eureka服务地址的变化时间间隔，单位为秒。默认为 5 * 60 * 1000 s</li>
 <li><code>getEurekaServerReadTimeoutSeconds()</code>：获取Eureka-Server读取超时时间，单位为秒。默认为8s</li>
 <li><code>getBackupRegistryImpl()</code>：获取备份注册中心实现类。默认为null</li>
 <li><code>shouldPreferSameZoneEureka()</code>：相同Zone的Eureka是否优先。默认为true</li>
@@ -626,10 +626,10 @@
 <h2 id="EurekaTransportConfig"><a href="#EurekaTransportConfig" class="headerlink" title="EurekaTransportConfig"></a>EurekaTransportConfig</h2><h3 id="EurekaTransportConfig简介"><a href="#EurekaTransportConfig简介" class="headerlink" title="EurekaTransportConfig简介"></a>EurekaTransportConfig简介</h3><p>所属包：<code>com.netflix.discovery.shared.transport.EurekaTransportConfig</code>，<strong>Eureka网络传输配置接口</strong>。</p>
 <h3 id="EurekaTransportConfig源码"><a href="#EurekaTransportConfig源码" class="headerlink" title="EurekaTransportConfig源码"></a>EurekaTransportConfig源码</h3><p>博主已添加中文注释，<a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/shared/transport/EurekaTransportConfig.java" target="_blank" rel="noopener">点击查看</a>。</p>
 <h3 id="EurekaTransportConfig重要属性或者重要方法"><a href="#EurekaTransportConfig重要属性或者重要方法" class="headerlink" title="EurekaTransportConfig重要属性或者重要方法"></a>EurekaTransportConfig重要属性或者重要方法</h3><ul>
-<li><code>getSessionedClientReconnectIntervalSeconds()</code>：Eureka-Client 会话重新连接的时间间隔，单位为秒，默认为20*60s。</li>
+<li><code>getSessionedClientReconnectIntervalSeconds()</code>：Eureka-Client 会话重新连接的时间间隔，单位为秒，默认为20 * 60s。</li>
 <li><code>getRetryableClientQuarantineRefreshPercentage()</code>：请求失败的Eureka-Client隔离集合占Eureka-Client总数的占比，超过该比例会进行清空，默认为0.66。</li>
 <li>Endpoint相关：<ul>
-<li><code>getAsyncResolverRefreshIntervalMs()</code>：异步解析 EndPoint 集群频率，单位为毫秒。默认为5 <em> 60 </em> 1000ms。</li>
+<li><code>getAsyncResolverRefreshIntervalMs()</code>：异步解析 EndPoint 集群频率，单位为毫秒。默认为5 * 60 * 1000ms。</li>
 <li><code>getAsyncResolverWarmUpTimeoutMs()</code>：异步解析器预热解析 EndPoint 集群超时时间，单位为毫秒。默认为5000s。</li>
 <li><code>getAsyncExecutorThreadPoolSize()</code>：异步线程池大小，默认为5。</li>
 </ul>
@@ -639,7 +639,7 @@
 <h3 id="DefaultEurekaTransportConfig源码"><a href="#DefaultEurekaTransportConfig源码" class="headerlink" title="DefaultEurekaTransportConfig源码"></a>DefaultEurekaTransportConfig源码</h3><p>博主已添加中文注释，<a href="https://github.com/yoga0521/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/shared/transport/DefaultEurekaTransportConfig.java" target="_blank" rel="noopener">点击查看</a>。</p>
 <h3 id="DefaultEurekaTransportConfig重要属性或者重要方法"><a href="#DefaultEurekaTransportConfig重要属性或者重要方法" class="headerlink" title="DefaultEurekaTransportConfig重要属性或者重要方法"></a>DefaultEurekaTransportConfig重要属性或者重要方法</h3><ul>
 <li>其他实现方法基本类似，都是从配置文件中获取值，举一个例子：<ul>
-<li><code>getSessionedClientReconnectIntervalSeconds()</code>：Eureka-Client 会话重新连接的时间间隔，并传一个默认值（这里是20*60），namespace的属性key都在PropertyBasedTransportConfigConstants中。</li>
+<li><code>getSessionedClientReconnectIntervalSeconds()</code>：Eureka-Client 会话重新连接的时间间隔，并传一个默认值（这里是20 * 60），namespace的属性key都在PropertyBasedTransportConfigConstants中。</li>
 </ul>
 </li>
 </ul>
@@ -774,7 +774,7 @@
   <p><span>本文标题:</span><a href="/2018/03/21/Eureka源码—EurekaClient/">Eureka源码—EurekaClient</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2018年03月21日 - 20:03</p>
-  <!-- <p><span>最后更新:</span>2018年05月06日 - 20:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年05月20日 - 17:05</p> -->
   <p><span>原始链接:</span><a href="/2018/03/21/Eureka源码—EurekaClient/" title="Eureka源码—EurekaClient">https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/"  aria-label="复制成功！"></i></span>
   </p>
@@ -906,7 +906,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -929,7 +929,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -956,7 +960,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1087,7 +1093,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 7.0k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 10.2k 字</i>
     </span>
 </div>
 
