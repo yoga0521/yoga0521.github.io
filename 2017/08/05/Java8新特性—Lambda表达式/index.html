@@ -124,21 +124,21 @@
 
 
 
-  <meta name="description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。 PS：博主的公司也切换为JDK1.8了，CTO让我进行一次JDK1.8的分享，本文也是记录一下。">
+  <meta name="description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8新特性—Lambda表达式">
 <meta property="og:url" content="https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
-<meta property="og:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。 PS：博主的公司也切换为JDK1.8了，CTO让我进行一次JDK1.8的分享，本文也是记录一下。">
+<meta property="og:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
-<meta property="og:updated_time" content="2018-05-20T10:23:25.342Z">
+<meta property="og:updated_time" content="2018-05-22T07:06:51.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8新特性—Lambda表达式">
-<meta name="twitter:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。 PS：博主的公司也切换为JDK1.8了，CTO让我进行一次JDK1.8的分享，本文也是记录一下。">
+<meta name="twitter:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
 
 
@@ -523,8 +523,8 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。</p>
-<p>PS：博主的公司也切换为JDK1.8了，CTO让我进行一次JDK1.8的分享，本文也是记录一下。</p>
 <a id="more"></a>
+<p>ps：博主的公司也切换为JDK1.8了，CTO让我进行一次JDK1.8的分享，本文也是记录一下。</p>
 <h2 id="什么是Lambda表达式"><a href="#什么是Lambda表达式" class="headerlink" title="什么是Lambda表达式"></a>什么是Lambda表达式</h2><p>Lambda表达式可以理解为简洁地表示可传递的匿名函数的一种方式。 </p>
 <p>是不是很抽象的一句话？那让我们看一下它长什么样。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(String s) -&gt; s. isEmpty()</span><br></pre></td></tr></table></figure>
@@ -761,7 +761,7 @@
   <p><span>本文标题:</span><a href="/2017/08/05/Java8新特性—Lambda表达式/">Java8新特性—Lambda表达式</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年08月05日 - 13:08</p>
-  <!-- <p><span>最后更新:</span>2018年05月20日 - 18:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年05月22日 - 15:05</p> -->
   <p><span>原始链接:</span><a href="/2017/08/05/Java8新特性—Lambda表达式/" title="Java8新特性—Lambda表达式">https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/"  aria-label="复制成功！"></i></span>
   </p>
@@ -795,6 +795,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/21/Java内部类详解/" rel="next" title="Java内部类详解">
+                <i class="fa fa-chevron-left"></i> Java内部类详解
+              </a>
             
           </div>
 
@@ -889,7 +893,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1076,7 +1080,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 10.2k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 11.3k 字</i>
     </span>
 </div>
 
