@@ -125,21 +125,21 @@
 
 
   <meta name="description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
-<meta name="keywords" content="Java">
+<meta name="keywords" content="Java,Java8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8新特性—Lambda表达式">
 <meta property="og:url" content="https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
 <meta property="og:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
-<meta property="og:updated_time" content="2018-05-22T07:06:51.577Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png">
+<meta property="og:updated_time" content="2018-05-22T13:16:21.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8新特性—Lambda表达式">
 <meta name="twitter:description" content="前言JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg">
 
 
 
@@ -528,7 +528,7 @@
 <h2 id="什么是Lambda表达式"><a href="#什么是Lambda表达式" class="headerlink" title="什么是Lambda表达式"></a>什么是Lambda表达式</h2><p>Lambda表达式可以理解为简洁地表示可传递的匿名函数的一种方式。 </p>
 <p>是不是很抽象的一句话？那让我们看一下它长什么样。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(String s) -&gt; s. isEmpty()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg" alt="nick young"></p>
+<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/young.jpg" alt="nick young"></p>
 <p>什么鬼，长得也这么抽象。</p>
 <p>我们看一下表达式结构中最特别的是<code>-&gt;</code>，而这个箭头的左边是Lambda的参数列表，右边是Lambda的函数主体。所以Lambda表达式的结构表示为：<code>(parameters) -&gt; expression</code> 或 <code>(parameters) -&gt;{ statements; }</code>。</p>
 <p>如下：</p>
@@ -674,7 +674,7 @@
 <p>我们看一下下面这段代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;Object, String&gt; f = <span class="keyword">new</span> Function&lt;Object, String&gt;() &#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> o.toString();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>这段代码的对应的字节码：</p>
-<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png" alt="匿名内部类的字节码"></p>
+<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png" alt="匿名内部类的字节码"></p>
 <ul>
 <li>可以看到，通过字节码操作new，一个TestFunction$1类型的对象被实例化了。与此同时，一个指向新创建对象的引用会被压入栈。 </li>
 <li>dup操作会复制栈上的引用。</li>
@@ -684,7 +684,7 @@
 <p>我们将这段代码使用Lambda表达式实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;Object, String&gt; f = Object::toString;</span><br></pre></td></tr></table></figure>
 <p>对应的字节码：</p>
-<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png" alt="Lambda字节码"></p>
+<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Java8%E6%96%B0%E7%89%B9%E6%80%A7/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81.png" alt="Lambda字节码"></p>
 <p>通过两段字节码的对比，我们可以看到，Lambda表达式是通过<code>invokedynamic</code>字节码指令创建额外的类。</p>
 <p><code>invokedynamic</code>最初被JDK7引入，用于支持运行于JVM上的动态类型语言。执行方法调用时，invokedynamic添加了更高层的抽象，使得一部分逻辑可以依据动态语言的特征来决定调用目标。</p>
 <p>使用<code>invokedynamic</code>，可以将实现Lambda表达式的这部分代码的字节码生成 推迟到运行时。这种设计选择带来了一系列好结果 ：</p>
@@ -712,6 +712,8 @@
       <div class="post-tags">
         
           <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+        
+          <a href="/tags/Java8/" rel="tag"><i class="fa fa-tag"></i> Java8</a>
         
       </div>
     
@@ -761,7 +763,7 @@
   <p><span>本文标题:</span><a href="/2017/08/05/Java8新特性—Lambda表达式/">Java8新特性—Lambda表达式</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年08月05日 - 13:08</p>
-  <!-- <p><span>最后更新:</span>2018年05月22日 - 15:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年05月22日 - 21:05</p> -->
   <p><span>原始链接:</span><a href="/2017/08/05/Java8新特性—Lambda表达式/" title="Java8新特性—Lambda表达式">https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/"  aria-label="复制成功！"></i></span>
   </p>
@@ -796,8 +798,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/21/Java内部类详解/" rel="next" title="Java内部类详解">
-                <i class="fa fa-chevron-left"></i> Java内部类详解
+              <a href="/2017/01/22/HashMap源码解析/" rel="next" title="HashMap源码解析">
+                <i class="fa fa-chevron-left"></i> HashMap源码解析
               </a>
             
           </div>
@@ -893,7 +895,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -920,7 +922,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1080,7 +1086,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 11.3k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 17.4k 字</i>
     </span>
 </div>
 
