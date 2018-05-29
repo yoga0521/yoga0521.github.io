@@ -137,7 +137,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/%E9%AB%98%E4%BD%8D%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97hash%E5%AF%B9%E6%AF%94.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/hash%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/tableSizeFor%E7%A4%BA%E4%BE%8B.png">
-<meta property="og:updated_time" content="2018-05-24T09:55:50.231Z">
+<meta property="og:updated_time" content="2018-05-29T14:50:41.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap源码解析">
 <meta name="twitter:description" content="前言HashMap是我们最常使用的数据类型之一，也是面试中最容易问到的集合之一。本篇文章主要通过分析HashMap的源码，更深入的了解HashMap，以及对比HashMap在JDK1.8和JDK1.7的不同。">
@@ -478,7 +478,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">6,062</span>
+                    <span class="post-count">6,096</span>
                     
                   </span>
               
@@ -535,7 +535,8 @@
 <p>ps：为什么HashMap继承了AbstractMap抽象类，还要实现Map接口？</p>
 <p>​    Java集合框架的编写者Josh Bloch说这是一个<strong>错误</strong>。。在java集合框架中，类似这样的写法很多。 JDK的维护者，后来不认为这个小小的失误值得去修改。所以就这样存在下来了。 </p>
 <h2 id="HashMap特点"><a href="#HashMap特点" class="headerlink" title="HashMap特点"></a>HashMap特点</h2><ol>
-<li>HashMap非线程安全，创建线程安全的HashMap的方法：<code>Map map = Collections.synchronizedMap(new HashMap());</code>，或者使用<code>ConcurrentHashMap</code>。</li>
+<li>HashMap非线程安全，在多线程中保证线程安全的解决方法：使用<code>ConcurrentHashMap</code>，<code>Map map = Collections.synchronizedMap(new HashMap());</code>。</li>
+<li>HashMap底层是由数组和链表组成的，JDK1.8之后添加了红黑树，文章后续有介绍。</li>
 <li>HashMap的key和value都允许为null。</li>
 <li>HashMap的数据存储是无序的。</li>
 <li>如果需要put的key为自定义的对象，需要重写该对象的equals方法和hashCode方法。<strong>注意</strong>如果对象是可变的，那你就有可能get不到你保存在HashMap中的数据了，所以重写hashCode的时候需要小心哦~</li>
@@ -821,7 +822,7 @@
   <p><span>本文标题:</span><a href="/2017/01/22/HashMap源码解析/">HashMap源码解析</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年01月22日 - 15:01</p>
-  <!-- <p><span>最后更新:</span>2018年05月24日 - 17:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年05月29日 - 22:05</p> -->
   <p><span>原始链接:</span><a href="/2017/01/22/HashMap源码解析/" title="HashMap源码解析">https://yoga0521.github.io/2017/01/22/HashMap源码解析/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/01/22/HashMap源码解析/"  aria-label="复制成功！"></i></span>
   </p>
