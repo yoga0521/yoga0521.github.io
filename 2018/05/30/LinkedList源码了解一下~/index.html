@@ -124,13 +124,20 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="yoga&#39;s blog">
-<meta property="og:url" content="https://yoga0521.github.io/index.html">
+  <meta name="description" content="前言LinkedList是我们比较常用的数据类型之一，也是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedList的源码。 LinkedList简介LinkedList是基于双向循环链表实现的，它的头结点不存放数据。 LinkedList类结构 可以从上图看出，LinkedList继承AbstractSequentialList抽象类，实现了List，Deque，Cloneable，">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedList源码了解一下~">
+<meta property="og:url" content="https://yoga0521.github.io/2018/05/30/LinkedList源码了解一下~/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
+<meta property="og:description" content="前言LinkedList是我们比较常用的数据类型之一，也是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedList的源码。 LinkedList简介LinkedList是基于双向循环链表实现的，它的头结点不存放数据。 LinkedList类结构 可以从上图看出，LinkedList继承AbstractSequentialList抽象类，实现了List，Deque，Cloneable，">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Collection/LinkedList%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-05-30T15:26:59.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yoga&#39;s blog">
+<meta name="twitter:title" content="LinkedList源码了解一下~">
+<meta name="twitter:description" content="前言LinkedList是我们比较常用的数据类型之一，也是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedList的源码。 LinkedList简介LinkedList是基于双向循环链表实现的，它的头结点不存放数据。 LinkedList类结构 可以从上图看出，LinkedList继承AbstractSequentialList抽象类，实现了List，Deque，Cloneable，">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Collection/LinkedList%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
 
 
 
@@ -139,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="https://yoga0521.github.io/"/>
+  <link rel="canonical" href="https://yoga0521.github.io/2018/05/30/LinkedList源码了解一下~/"/>
 
 
 
@@ -149,7 +156,7 @@
   };
 </script>
 
-  <title>yoga's blog</title>
+  <title>LinkedList源码了解一下~ | yoga's blog</title>
   
 
 
@@ -205,8 +212,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,7 +252,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
@@ -356,9 +362,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -390,11 +396,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/30/LinkedList源码了解一下~/" itemprop="url">
-                  LinkedList源码了解一下~
-                </a>
+          <h1 class="post-title" itemprop="name headline">LinkedList源码了解一下~
               
             
           </h1>
@@ -491,6 +493,15 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-thermometer-three-quarters"></i>
+             热度： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            <span>℃</span>
+            </span>
+          
 
           
 
@@ -509,9 +520,7 @@
       
 
       
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedList是我们比较常用的数据类型之一，也是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedList的源码。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedList是我们比较常用的数据类型之一，也是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedList的源码。</p>
 <h2 id="LinkedList简介"><a href="#LinkedList简介" class="headerlink" title="LinkedList简介"></a>LinkedList简介</h2><p>LinkedList是基于双向循环链表实现的，它的头结点不存放数据。</p>
 <h2 id="LinkedList类结构"><a href="#LinkedList类结构" class="headerlink" title="LinkedList类结构"></a>LinkedList类结构</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Collection/LinkedList%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="LinkedList类结构图"></p>
 <p>可以从上图看出，LinkedList继承AbstractSequentialList抽象类，实现了List，Deque，Cloneable，Serializable接口。</p>
@@ -722,8 +731,6 @@
 </li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
-          
-        
       
     </div>
 
@@ -735,11 +742,79 @@
 
     <!-- 将标签提前 -->
     
-
+      <div class="post-tags">
+        
+          <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+        
+      </div>
     
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="yoga 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="yoga 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/05/30/LinkedList源码了解一下~/">LinkedList源码了解一下~</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
+  <p><span>发布时间:</span>2018年05月30日 - 19:05</p>
+  <!-- <p><span>最后更新:</span>2018年05月30日 - 23:05</p> -->
+  <p><span>原始链接:</span><a href="/2018/05/30/LinkedList源码了解一下~/" title="LinkedList源码了解一下~">https://yoga0521.github.io/2018/05/30/LinkedList源码了解一下~/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/05/30/LinkedList源码了解一下~/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)">CC BY-NC-SA 4.0</a> 许可协议。 转载请注明出处！</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      </div>
     
 
     
@@ -747,605 +822,28 @@
     <footer class="post-footer">
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/26/漏桶算法与令牌桶算法简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/漏桶算法与令牌桶算法简介/" itemprop="url">
-                  漏桶算法与令牌桶算法简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T13:05:32+08:00">2018-03-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/26/漏桶算法与令牌桶算法简介/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/26/漏桶算法与令牌桶算法简介/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">109</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/漏桶算法与令牌桶算法简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/漏桶算法与令牌桶算法简介/" rel="next" title="漏桶算法与令牌桶算法简介">
+                <i class="fa fa-chevron-left"></i> 漏桶算法与令牌桶算法简介
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/23/Eureka源码—EurekaServer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/23/Eureka源码—EurekaServer/" itemprop="url">
-                  Eureka源码—EurekaServer
-                </a>
-              
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T20:14:15+08:00">2018-03-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/Eureka/" itemprop="url" rel="index"><span itemprop="name">Eureka</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/23/Eureka源码—EurekaServer/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/23/Eureka源码—EurekaServer/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">2,383</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">11min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章主要解读Eureka-Server初始化的相关源码，文章较长，请谨慎点击！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/23/Eureka源码—EurekaServer/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/21/Eureka源码—EurekaClient/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/21/Eureka源码—EurekaClient/" itemprop="url">
-                  Eureka源码—EurekaClient
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-21T20:19:14+08:00">2018-03-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/Eureka/" itemprop="url" rel="index"><span itemprop="name">Eureka</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/21/Eureka源码—EurekaClient/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/21/Eureka源码—EurekaClient/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">3,363</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">14min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章主要解读Eureka-Client初始化的相关源码，文章较长，请谨慎点击！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/21/Eureka源码—EurekaClient/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1355,1201 +853,24 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2018/03/18/Eureka源码系列简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/18/Eureka源码系列简介/" itemprop="url">
-                  Eureka源码系列简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T20:46:22+08:00">2018-03-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringCloud/Eureka/" itemprop="url" rel="index"><span itemprop="name">Eureka</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/18/Eureka源码系列简介/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2018/03/18/Eureka源码系列简介/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">533</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">2min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近关于微服务的话题很火热，本系列文章主要是从源码去解读Eureka。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/18/Eureka源码系列简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/12/02/JPA使用Java8的LocalDateTime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/02/JPA使用Java8的LocalDateTime/" itemprop="url">
-                  JPA使用Java8的LocalDateTime
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-02T22:49:03+08:00">2017-12-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JPA/" itemprop="url" rel="index"><span itemprop="name">JPA</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/02/JPA使用Java8的LocalDateTime/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/12/02/JPA使用Java8的LocalDateTime/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">287</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇文章主要介绍JPA如何正确使用<code>LocalDateTime</code>与数据库<code>datetime</code>属性进行映射。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/02/JPA使用Java8的LocalDateTime/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/12/01/MyBatis使用Java8的LocalDateTime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/01/MyBatis使用Java8的LocalDateTime/" itemprop="url">
-                  MyBatis使用Java8的LocalDateTime
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T21:42:15+08:00">2017-12-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MyBatis/" itemprop="url" rel="index"><span itemprop="name">MyBatis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/01/MyBatis使用Java8的LocalDateTime/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/12/01/MyBatis使用Java8的LocalDateTime/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">294</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知，Java8之前的时间API有很多问题，比如：<strong>非线程安全</strong>，<strong>设计很差</strong>。<strong>时区处理麻烦</strong>。新的时间API（<code>java.time</code>包）解决了这些问题，所以我们在平时开发尽可能的使用新的时间API。但是MyBatis使用<code>LocalDataTime</code>映射到数据库的<code>datetime</code>属性时，会报错。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/01/MyBatis使用Java8的LocalDateTime/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/08/05/Java8新特性—Lambda表达式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/05/Java8新特性—Lambda表达式/" itemprop="url">
-                  Java8新特性—Lambda表达式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-05T13:41:59+08:00">2017-08-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Java8新特性/" itemprop="url" rel="index"><span itemprop="name">Java8新特性</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/05/Java8新特性—Lambda表达式/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/08/05/Java8新特性—Lambda表达式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">3,250</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">12min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JDK1.8是自JDK1.5以来最具革命性的版本。JDK1.8为Java语言、编译器、类库、开发工具与JVM（Java虚拟机）带来了大量新特性。所做的改变，在许多方面比Java历史上任何一次改变都深远。它们会让你编起程来更容易。本文主要介绍JDK1.8最重要的新特性之一：Lambda表达式。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/05/Java8新特性—Lambda表达式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/24/LinkedHashMap源码了解一下~/" itemprop="url">
-                  LinkedHashMap源码了解一下~
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-24T19:25:37+08:00">2017-01-24</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Map/" itemprop="url" rel="index"><span itemprop="name">Map</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/24/LinkedHashMap源码了解一下~/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/01/24/LinkedHashMap源码了解一下~/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">72</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>HashMap是我们最常使用的数据类型之一，也是面试中最容易问到的集合之一。本篇文章主要通过分析HashMap的源码，更深入的了解HashMap，以及对比HashMap在JDK1.8和JDK1.7的不同。</p>
-<h2 id="LinkedHashMap简介"><a href="#LinkedHashMap简介" class="headerlink" title="LinkedHashMap简介"></a>LinkedHashMap简介</h2><h2 id="LinkedHashMap类结构"><a href="#LinkedHashMap类结构" class="headerlink" title="LinkedHashMap类结构"></a>LinkedHashMap类结构</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="LinkedHashMap类结构图"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoga0521.github.io/2017/01/22/HashMap源码了解一下~/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yoga">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blogavatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yoga's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/22/HashMap源码了解一下~/" itemprop="url">
-                  HashMap源码了解一下~
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-22T15:27:57+08:00">2017-01-22</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Map/" itemprop="url" rel="index"><span itemprop="name">Map</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/22/HashMap源码了解一下~/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count hc-comment-count" data-xid="2017/01/22/HashMap源码了解一下~/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          <!--以下部分为：字数统计、阅读时长插入代码-->
-          <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">6,096</span>
-                    
-                  </span>
-              
-                <span class="post-time">
-              &nbsp; | &nbsp;
-                    <span class="post-meta-item-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
-                    <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">27min</span>
-                    
-                  </span>
-          <!--以上部分为：字数统计、阅读时长插入代码-->
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>HashMap是我们最常使用的数据类型之一，也是面试中最容易问到的集合之一。本篇文章主要通过分析HashMap的源码，更深入的了解HashMap，以及对比HashMap在JDK1.8和JDK1.7的不同。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/22/HashMap源码了解一下~/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <!-- 将标签提前 -->
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -2572,8 +893,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2706,6 +1036,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList简介"><span class="nav-number">2.</span> <span class="nav-text">LinkedList简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList类结构"><span class="nav-number">3.</span> <span class="nav-text">LinkedList类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList特点"><span class="nav-number">4.</span> <span class="nav-text">LinkedList特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList源码"><span class="nav-number">5.</span> <span class="nav-text">LinkedList源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList成员变量"><span class="nav-number">5.1.</span> <span class="nav-text">LinkedList成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList内部类"><span class="nav-number">5.2.</span> <span class="nav-text">LinkedList内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node"><span class="nav-number">5.2.1.</span> <span class="nav-text">Node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList构造函数"><span class="nav-number">5.3.</span> <span class="nav-text">LinkedList构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList提供的API"><span class="nav-number">5.4.</span> <span class="nav-text">LinkedList提供的API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList重要方法"><span class="nav-number">5.5.</span> <span class="nav-text">LinkedList重要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add-E-e"><span class="nav-number">5.5.1.</span> <span class="nav-text">add(E e)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-int-index-E-element"><span class="nav-number">5.5.2.</span> <span class="nav-text">add(int index, E element)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">5.5.3.</span> <span class="nav-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="nav-number">5.5.4.</span> <span class="nav-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contains-Object-o"><span class="nav-number">5.5.5.</span> <span class="nav-text">contains(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-int-index"><span class="nav-number">5.5.6.</span> <span class="nav-text">get(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-int-index"><span class="nav-number">5.5.7.</span> <span class="nav-text">remove(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-Object-o"><span class="nav-number">5.5.8.</span> <span class="nav-text">remove(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeAll-Collection-lt-gt-c"><span class="nav-number">5.5.9.</span> <span class="nav-text">removeAll(Collection&lt;?&gt; c)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2886,6 +1232,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
 
   
 
@@ -2905,6 +1255,8 @@
 
 		_hcwp.push({widget:"Bloggerstream", widget_id: 104196, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
+		
+		_hcwp.push({widget:"Stream", widget_id: 104196, xid: "2018/05/30/LinkedList源码了解一下~/"});
 		
 
 		(function() {
@@ -3270,28 +1622,6 @@
 
   
   
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
 
   
 
@@ -3311,7 +1641,7 @@
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script type="text/javascript">
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#more");
   
   </script>
 
