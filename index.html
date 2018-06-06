@@ -1772,7 +1772,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/01/24/LinkedHashMap源码了解一下~/" itemprop="url">
-                  LinkedHashMap源码了解一下~
+                  LinkedHashMap源码了解一下
                 </a>
               
             
@@ -1889,20 +1889,14 @@
 
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。</p>
-<h2 id="LinkedHashMap简介"><a href="#LinkedHashMap简介" class="headerlink" title="LinkedHashMap简介"></a>LinkedHashMap简介</h2><h2 id="LinkedHashMap类结构"><a href="#LinkedHashMap类结构" class="headerlink" title="LinkedHashMap类结构"></a>LinkedHashMap类结构</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="LinkedHashMap类结构图"></p>
-<p>可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。</p>
-<h2 id="LinkedHashMap特点"><a href="#LinkedHashMap特点" class="headerlink" title="LinkedHashMap特点"></a>LinkedHashMap特点</h2><ol>
-<li>LinkedHashMap非线程安全，在多线程中保证线程安全的解决方法：使用<code>Map map = Collections.synchronizedMap(new LinkedHashMap());</code>。</li>
-<li>LinkedHashMap底层是数组和双向链表组成的。</li>
-<li>LinkedHashMap的key和value都允许为null。</li>
-<li>LinkedHashMap的数据存储是有序的。</li>
-<li>LinkedHashMap继承自HashMap，所以HashMap的特点，除了输出无序，其他LinkedHashMap都有。</li>
-</ol>
-<h2 id="LinkedHashMap源码"><a href="#LinkedHashMap源码" class="headerlink" title="LinkedHashMap源码"></a>LinkedHashMap源码</h2><h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> accessOrder;</span><br></pre></td></tr></table></figure>
-
-          
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/24/LinkedHashMap源码了解一下~/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1978,7 +1972,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/01/22/HashMap源码了解一下/" itemprop="url">
-                  HashMap源码了解一下~
+                  HashMap源码了解一下
                 </a>
               
             
@@ -2178,7 +2172,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/01/21/Java内部类了解一下/" itemprop="url">
-                  Java内部类了解一下~
+                  Java内部类了解一下
                 </a>
               
             

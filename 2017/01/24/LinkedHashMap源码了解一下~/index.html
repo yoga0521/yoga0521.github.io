@@ -124,19 +124,19 @@
 
 
 
-  <meta name="description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。 LinkedHashMap简介LinkedHashMap类结构 可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。 LinkedHashMap">
+  <meta name="description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。">
 <meta name="keywords" content="Java,Java8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LinkedHashMap源码了解一下~">
+<meta property="og:title" content="LinkedHashMap源码了解一下">
 <meta property="og:url" content="https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/index.html">
 <meta property="og:site_name" content="yoga&#39;s blog">
-<meta property="og:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。 LinkedHashMap简介LinkedHashMap类结构 可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。 LinkedHashMap">
+<meta property="og:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-01T16:06:36.203Z">
+<meta property="og:updated_time" content="2018-06-06T10:57:39.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LinkedHashMap源码了解一下~">
-<meta name="twitter:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。 LinkedHashMap简介LinkedHashMap类结构 可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。 LinkedHashMap">
+<meta name="twitter:title" content="LinkedHashMap源码了解一下">
+<meta name="twitter:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
 
 
@@ -156,7 +156,7 @@
   };
 </script>
 
-  <title>LinkedHashMap源码了解一下~ | yoga's blog</title>
+  <title>LinkedHashMap源码了解一下 | yoga's blog</title>
   
 
 
@@ -396,7 +396,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LinkedHashMap源码了解一下~
+          <h1 class="post-title" itemprop="name headline">LinkedHashMap源码了解一下
               
             
           </h1>
@@ -521,6 +521,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。</p>
+<a id="more"></a>
 <h2 id="LinkedHashMap简介"><a href="#LinkedHashMap简介" class="headerlink" title="LinkedHashMap简介"></a>LinkedHashMap简介</h2><h2 id="LinkedHashMap类结构"><a href="#LinkedHashMap类结构" class="headerlink" title="LinkedHashMap类结构"></a>LinkedHashMap类结构</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="LinkedHashMap类结构图"></p>
 <p>可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。</p>
 <h2 id="LinkedHashMap特点"><a href="#LinkedHashMap特点" class="headerlink" title="LinkedHashMap特点"></a>LinkedHashMap特点</h2><ol>
@@ -594,11 +595,11 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/">LinkedHashMap源码了解一下~</a></p>
+  <p><span>本文标题:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/">LinkedHashMap源码了解一下</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年01月24日 - 19:01</p>
-  <!-- <p><span>最后更新:</span>2018年06月02日 - 00:06</p> -->
-  <p><span>原始链接:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/" title="LinkedHashMap源码了解一下~">https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/</a>
+  <!-- <p><span>最后更新:</span>2018年06月06日 - 18:06</p> -->
+  <p><span>原始链接:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/" title="LinkedHashMap源码了解一下">https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>版权声明:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)">CC BY-NC-SA 4.0</a> 许可协议。 转载请注明出处！</p>  
@@ -632,8 +633,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/22/HashMap源码了解一下/" rel="next" title="HashMap源码了解一下~">
-                <i class="fa fa-chevron-left"></i> HashMap源码了解一下~
+              <a href="/2017/01/22/HashMap源码了解一下/" rel="next" title="HashMap源码了解一下">
+                <i class="fa fa-chevron-left"></i> HashMap源码了解一下
               </a>
             
           </div>
