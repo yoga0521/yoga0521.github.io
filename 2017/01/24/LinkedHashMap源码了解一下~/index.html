@@ -133,7 +133,7 @@
 <meta property="og:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-06T10:57:39.807Z">
+<meta property="og:updated_time" content="2018-06-07T08:19:19.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinkedHashMap源码了解一下">
 <meta name="twitter:description" content="前言LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。">
@@ -474,7 +474,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">194</span>
+                    <span class="post-count">535</span>
                     
                   </span>
               
@@ -484,7 +484,7 @@
                       <i class="fa fa-clock-o"></i>
                     </span>
                     <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
+                    <span class="post-count">2min</span>
                     
                   </span>
           <!--以上部分为：字数统计、阅读时长插入代码-->
@@ -522,6 +522,9 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LinkedHashMap是面试中比较容易问到的集合之一。本篇文章主要通过分析LinkedHashMap的源码，更深入的了解LinkedHashMap，以及对比LinkedHashMap在JDK1.8和JDK1.7的不同。</p>
 <a id="more"></a>
+<blockquote>
+<p>本文基于jdk1.8</p>
+</blockquote>
 <h2 id="LinkedHashMap简介"><a href="#LinkedHashMap简介" class="headerlink" title="LinkedHashMap简介"></a>LinkedHashMap简介</h2><h2 id="LinkedHashMap类结构"><a href="#LinkedHashMap类结构" class="headerlink" title="LinkedHashMap类结构"></a>LinkedHashMap类结构</h2><p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Map/LinkedHashMap%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="LinkedHashMap类结构图"></p>
 <p>可以从上图看出，LinkedHashMap继承HashMap，实现了Map接口。</p>
 <h2 id="LinkedHashMap特点"><a href="#LinkedHashMap特点" class="headerlink" title="LinkedHashMap特点"></a>LinkedHashMap特点</h2><ol>
@@ -531,7 +534,10 @@
 <li>LinkedHashMap的数据存储是有序的。</li>
 <li>LinkedHashMap继承自HashMap，所以HashMap的特点，除了输出无序，其他LinkedHashMap都有。</li>
 </ol>
-<h2 id="LinkedHashMap源码"><a href="#LinkedHashMap源码" class="headerlink" title="LinkedHashMap源码"></a>LinkedHashMap源码</h2><h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> accessOrder;</span><br></pre></td></tr></table></figure>
+<h2 id="LinkedHashMap源码"><a href="#LinkedHashMap源码" class="headerlink" title="LinkedHashMap源码"></a>LinkedHashMap源码</h2><h3 id="LinkedHashMap成员变量"><a href="#LinkedHashMap成员变量" class="headerlink" title="LinkedHashMap成员变量"></a>LinkedHashMap成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 双向链表的头节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 双向链表的尾节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 迭代时输出的顺序是插入节点的顺序。默认为false，若为true，则输出的顺序是按照访问节点的顺序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> accessOrder;</span><br></pre></td></tr></table></figure>
+<h3 id="LinkedHashMap内部类"><a href="#LinkedHashMap内部类" class="headerlink" title="LinkedHashMap内部类"></a>LinkedHashMap内部类</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>.<span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    Entry&lt;K,V&gt; before, after;</span><br><span class="line">    Entry(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        <span class="keyword">super</span>(hash, key, value, next);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="LinkedHashMap构造函数"><a href="#LinkedHashMap构造函数" class="headerlink" title="LinkedHashMap构造函数"></a>LinkedHashMap构造函数</h3><p>LinkedHashMap有5个构造方法，与HashMap的很相似，就是多了一个<code>accessOrder</code>控制输出顺序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedHashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 调用HashMap的无参构造函数，加载因子为默认值</span></span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="comment">// 迭代时输出的顺序是插入节点的顺序</span></span><br><span class="line">    accessOrder = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedHashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 调用HashMap的构造函数，指定初始容量</span></span><br><span class="line">    <span class="keyword">super</span>(initialCapacity);</span><br><span class="line">    <span class="comment">// 迭代时输出的顺序是插入节点的顺序</span></span><br><span class="line">    accessOrder = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedHashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 调用HashMap的构造函数，指定初始容量和加载因子</span></span><br><span class="line">    <span class="keyword">super</span>(initialCapacity, loadFactor);</span><br><span class="line">    <span class="comment">// 迭代时输出的顺序是插入节点的顺序</span></span><br><span class="line">    accessOrder = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedHashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 调用HashMap的无参构造函数，加载因子为默认值</span></span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="comment">// 迭代时输出的顺序是插入节点的顺序</span></span><br><span class="line">    accessOrder = <span class="keyword">false</span>;</span><br><span class="line">    putMapEntries(m, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -598,7 +604,7 @@
   <p><span>本文标题:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/">LinkedHashMap源码了解一下</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年01月24日 - 19:01</p>
-  <!-- <p><span>最后更新:</span>2018年06月06日 - 18:06</p> -->
+  <!-- <p><span>最后更新:</span>2018年06月07日 - 16:06</p> -->
   <p><span>原始链接:</span><a href="/2017/01/24/LinkedHashMap源码了解一下~/" title="LinkedHashMap源码了解一下">https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/01/24/LinkedHashMap源码了解一下~/"  aria-label="复制成功！"></i></span>
   </p>
@@ -854,7 +860,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap简介"><span class="nav-number">2.</span> <span class="nav-text">LinkedHashMap简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap类结构"><span class="nav-number">3.</span> <span class="nav-text">LinkedHashMap类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap特点"><span class="nav-number">4.</span> <span class="nav-text">LinkedHashMap特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap源码"><span class="nav-number">5.</span> <span class="nav-text">LinkedHashMap源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成员变量"><span class="nav-number">5.1.</span> <span class="nav-text">成员变量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap简介"><span class="nav-number">2.</span> <span class="nav-text">LinkedHashMap简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap类结构"><span class="nav-number">3.</span> <span class="nav-text">LinkedHashMap类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap特点"><span class="nav-number">4.</span> <span class="nav-text">LinkedHashMap特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap源码"><span class="nav-number">5.</span> <span class="nav-text">LinkedHashMap源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap成员变量"><span class="nav-number">5.1.</span> <span class="nav-text">LinkedHashMap成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap内部类"><span class="nav-number">5.2.</span> <span class="nav-text">LinkedHashMap内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Entry"><span class="nav-number">5.2.1.</span> <span class="nav-text">Entry</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap构造函数"><span class="nav-number">5.3.</span> <span class="nav-text">LinkedHashMap构造函数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -923,7 +929,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 23.5k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 23.9k 字</i>
     </span>
 </div>
 
