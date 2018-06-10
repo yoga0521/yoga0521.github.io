@@ -133,7 +133,7 @@
 <meta property="og:description" content="前言ArrayList是我们最常使用的数据类型之一，也是面试中最容易问到的集合之一。本篇文章主要通过分析ArrayList的源码，更深入的了解ArrayList，ArrayList在JDK1.8中添加了一些新的方法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/Java/Collection/ArrayList%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-06T10:57:08.839Z">
+<meta property="og:updated_time" content="2018-06-07T11:20:09.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArrayList源码解析了解一下">
 <meta name="twitter:description" content="前言ArrayList是我们最常使用的数据类型之一，也是面试中最容易问到的集合之一。本篇文章主要通过分析ArrayList的源码，更深入的了解ArrayList，ArrayList在JDK1.8中添加了一些新的方法。">
@@ -474,7 +474,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">3,152</span>
+                    <span class="post-count">3,752</span>
                     
                   </span>
               
@@ -484,7 +484,7 @@
                       <i class="fa fa-clock-o"></i>
                     </span>
                     <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">15min</span>
+                    <span class="post-count">17min</span>
                     
                   </span>
           <!--以上部分为：字数统计、阅读时长插入代码-->
@@ -534,12 +534,7 @@
 <li>ArrayList中的数据存储是有序的。</li>
 <li>ArrayList中的数据可以重复。</li>
 </ol>
-<h2 id="ArrayList源码"><a href="#ArrayList源码" class="headerlink" title="ArrayList源码"></a>ArrayList源码</h2><h3 id="ArrayList常量属性"><a href="#ArrayList常量属性" class="headerlink" title="ArrayList常量属性"></a>ArrayList常量属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化容量为10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList容量指定为0时，返回该空数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 默认返回的空数组，用户调用无参构造函数，刚创建一个ArrayList时，内部大小为0，返回的是该空数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList数组的最大值，-8是因为有些版本的虚拟机会保留8个字节长度的header</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="ArrayList成员变量"><a href="#ArrayList成员变量" class="headerlink" title="ArrayList成员变量"></a>ArrayList成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList元素保存的数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br></pre></td></tr></table></figure>
-<h3 id="ArrayList内部类"><a href="#ArrayList内部类" class="headerlink" title="ArrayList内部类"></a>ArrayList内部类</h3><h4 id="ArrayListSpliterator"><a href="#ArrayListSpliterator" class="headerlink" title="ArrayListSpliterator"></a>ArrayListSpliterator</h4><p>TODO</p>
-<h3 id="ArrayList构造函数"><a href="#ArrayList构造函数" class="headerlink" title="ArrayList构造函数"></a>ArrayList构造函数</h3><p>ArrayList一共有三个构造函数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 指定一个初始容量的构造函数。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 指定了初始容量为0，数组就是EMPTY_ELEMENTDATA</span></span><br><span class="line">        <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 无参构造函数，构造一个初始容量为默认值10的ArrayList。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过Collection创建ArrayList。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将参数c转为数组</span></span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    <span class="comment">// 判断数组是否为空，并且设置ArrayList的大小</span></span><br><span class="line">    <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">        <span class="comment">// 判断数组的类型是否是Object</span></span><br><span class="line">        <span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// replace with empty array.</span></span><br><span class="line">        <span class="comment">// 空的数组</span></span><br><span class="line">        <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="ArrayList提供的API"><a href="#ArrayList提供的API" class="headerlink" title="ArrayList提供的API"></a>ArrayList提供的API</h3><table>
+<h2 id="ArrayList提供的API"><a href="#ArrayList提供的API" class="headerlink" title="ArrayList提供的API"></a>ArrayList提供的API</h2><table>
 <thead>
 <tr>
 <th>方法名</th>
@@ -549,130 +544,136 @@
 <tbody>
 <tr>
 <td>add(E e)</td>
-<td></td>
+<td>将指定的元素添加到ArrayList的末尾。</td>
 </tr>
 <tr>
 <td>add(int index, E element)</td>
+<td>将指定的元素插入到ArrayList中的指定位置。</td>
+</tr>
+<tr>
+<td>addAll(Collection&lt;? extends E&gt; c)</td>
+<td>将指定的集合中的所有元素添加到ArrayList的末尾。</td>
+</tr>
+<tr>
+<td>addAll(int index, Collection&lt;? extends E&gt; c)</td>
+<td>将指定的集合中的所有元素添加到ArrayList中的指定位置。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>删除ArrayList中的所有元素。</td>
+</tr>
+<tr>
+<td>clone()</td>
+<td>ArrayList浅拷贝。</td>
+</tr>
+<tr>
+<td>contains(Object o)</td>
+<td>判断ArrayList中是否包含指定元素。</td>
+</tr>
+<tr>
+<td>ensureCapacity(int minCapacity)</td>
+<td>如有必要，增加ArrayList的容量，以确保它至少能容纳由最小容量参数指定的元素数量。</td>
+</tr>
+<tr>
+<td>forEach(Consumer&lt;? super E&gt; action)</td>
+<td>将消费操作（Consumer）应用于ArrayList的每一个元素，直到处理完所有数据或操作抛出异常为止。</td>
+</tr>
+<tr>
+<td>get(int index)</td>
+<td>获取ArrayList中指定位置的元素。</td>
+</tr>
+<tr>
+<td>indexOf(Object o)</td>
+<td>返回ArrayList中指定元素第一次出现的索引，如果此列表不包含元素，则返回-1。</td>
+</tr>
+<tr>
+<td>isEmpty()</td>
+<td>判断ArrayList是否为空。</td>
+</tr>
+<tr>
+<td>iterator()</td>
+<td>返回ArrayList中元素的迭代器。</td>
+</tr>
+<tr>
+<td>lastIndexOf(Object o)</td>
+<td>返回ArrayList中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1。</td>
+</tr>
+<tr>
+<td>listIterator()</td>
+<td>返回ArrayList中元素的列表迭代器。</td>
+</tr>
+<tr>
+<td>listIterator(int index)</td>
+<td>从ArrayList中指定的位置开始，返回ArrayList中元素的列表迭代器。</td>
+</tr>
+<tr>
+<td>remove(int index)</td>
+<td>删除ArrayList中指定位置的元素。</td>
+</tr>
+<tr>
+<td>remove(Object o)</td>
+<td>从ArrayList中删除第一次出现的指定元素（如果存在）。</td>
+</tr>
+<tr>
+<td>removeAll(Collection&lt;?&gt; c)</td>
+<td>从ArrayList中删除指定集合中包含的所有元素。</td>
+</tr>
+<tr>
+<td>removeIf(Predicate&lt;? super E&gt; filter)</td>
+<td>删除ArrayList中满足给定谓词（Predicate）的所有元素。</td>
+</tr>
+<tr>
+<td>removeRange(int fromIndex, int toIndex)</td>
+<td>从ArrayList中删除索引介于fromIndex（包含）和toIndex（不包括）之间的所有元素。</td>
+</tr>
+<tr>
+<td>replaceAll(UnaryOperator<e> operator)</e></td>
+<td>将运算符（UnaryOperator）应用于该元素的结果替换ArrayList中的每个元素。</td>
+</tr>
+<tr>
+<td>retainAll(Collection&lt;?&gt; c)</td>
+<td>只保留包含在指定集合中的ArrayList中的元素。</td>
+</tr>
+<tr>
+<td>set(int index, E element)</td>
+<td>用指定的元素替换ArrayList中指定位置的元素。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>获取ArrayList大小。</td>
+</tr>
+<tr>
+<td>sort(Comparator&lt;? super E&gt; c)</td>
+<td>根据指定的比较器对ArrayList进行排序。</td>
+</tr>
+<tr>
+<td>spliterator()</td>
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>subList(int fromIndex, int toIndex)</td>
+<td>返回指定的fromIndex（包含）和toIndex（不包括）之间的部分list。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>toArray()</td>
+<td>将ArrayList转换为数组。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>toArray(T[] a)</td>
+<td>将ArrayList转换为指定类型的数组。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
+<td>trimToSize()</td>
+<td>去除ArrayList中为空的位置，将此ArrayList的容量修改为数组的当前大小。</td>
 </tr>
 </tbody>
 </table>
-<h3 id="ArrayList重要方法"><a href="#ArrayList重要方法" class="headerlink" title="ArrayList重要方法"></a>ArrayList重要方法</h3><h4 id="arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length"><a href="#arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length" class="headerlink" title="arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)"></a>arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src,  <span class="keyword">int</span>  srcPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        Object dest, <span class="keyword">int</span> destPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="ArrayList源码"><a href="#ArrayList源码" class="headerlink" title="ArrayList源码"></a>ArrayList源码</h2><h3 id="ArrayList常量属性"><a href="#ArrayList常量属性" class="headerlink" title="ArrayList常量属性"></a>ArrayList常量属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化容量为10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList容量指定为0时，返回该空数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 默认返回的空数组，用户调用无参构造函数，刚创建一个ArrayList时，内部大小为0，返回的是该空数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList数组的最大值，-8是因为有些版本的虚拟机会保留8个字节长度的header</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayList成员变量"><a href="#ArrayList成员变量" class="headerlink" title="ArrayList成员变量"></a>ArrayList成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList元素保存的数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ArrayList大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayList内部类"><a href="#ArrayList内部类" class="headerlink" title="ArrayList内部类"></a>ArrayList内部类</h3><h4 id="ArrayListSpliterator"><a href="#ArrayListSpliterator" class="headerlink" title="ArrayListSpliterator"></a>ArrayListSpliterator</h4><p>TODO</p>
+<h3 id="ArrayList构造函数"><a href="#ArrayList构造函数" class="headerlink" title="ArrayList构造函数"></a>ArrayList构造函数</h3><p>ArrayList一共有三个构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 指定一个初始容量的构造函数。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 指定了初始容量为0，数组就是EMPTY_ELEMENTDATA</span></span><br><span class="line">        <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 无参构造函数，构造一个初始容量为默认值10的ArrayList。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过Collection创建ArrayList。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将参数c转为数组</span></span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    <span class="comment">// 判断数组是否为空，并且设置ArrayList的大小</span></span><br><span class="line">    <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">        <span class="comment">// 判断数组的类型是否是Object</span></span><br><span class="line">        <span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">            elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// replace with empty array.</span></span><br><span class="line">        <span class="comment">// 空的数组</span></span><br><span class="line">        <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayList重要方法解析"><a href="#ArrayList重要方法解析" class="headerlink" title="ArrayList重要方法解析"></a>ArrayList重要方法解析</h3><h4 id="arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length"><a href="#arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length" class="headerlink" title="arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)"></a>arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src,  <span class="keyword">int</span>  srcPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        Object dest, <span class="keyword">int</span> destPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>该方法是native修饰的，由C/C++来编写的。</p>
 <p>参数解释：</p>
 <table>
@@ -857,7 +858,7 @@
   <p><span>本文标题:</span><a href="/2017/01/19/ArrayList源码了解一下/">ArrayList源码解析了解一下</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2017年01月19日 - 20:01</p>
-  <!-- <p><span>最后更新:</span>2018年06月06日 - 18:06</p> -->
+  <!-- <p><span>最后更新:</span>2018年06月07日 - 19:06</p> -->
   <p><span>原始链接:</span><a href="/2017/01/19/ArrayList源码了解一下/" title="ArrayList源码解析了解一下">https://yoga0521.github.io/2017/01/19/ArrayList源码了解一下/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2017/01/19/ArrayList源码了解一下/"  aria-label="复制成功！"></i></span>
   </p>
@@ -1109,7 +1110,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList简介"><span class="nav-number">2.</span> <span class="nav-text">ArrayList简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList类结构"><span class="nav-number">3.</span> <span class="nav-text">ArrayList类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList特点"><span class="nav-number">4.</span> <span class="nav-text">ArrayList特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList源码"><span class="nav-number">5.</span> <span class="nav-text">ArrayList源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList常量属性"><span class="nav-number">5.1.</span> <span class="nav-text">ArrayList常量属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList成员变量"><span class="nav-number">5.2.</span> <span class="nav-text">ArrayList成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList内部类"><span class="nav-number">5.3.</span> <span class="nav-text">ArrayList内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayListSpliterator"><span class="nav-number">5.3.1.</span> <span class="nav-text">ArrayListSpliterator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList构造函数"><span class="nav-number">5.4.</span> <span class="nav-text">ArrayList构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList提供的API"><span class="nav-number">5.5.</span> <span class="nav-text">ArrayList提供的API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList重要方法"><span class="nav-number">5.6.</span> <span class="nav-text">ArrayList重要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length"><span class="nav-number">5.6.1.</span> <span class="nav-text">arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-E-e"><span class="nav-number">5.6.2.</span> <span class="nav-text">add(E e)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-int-index-E-element"><span class="nav-number">5.6.3.</span> <span class="nav-text">add(int index, E element)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">5.6.4.</span> <span class="nav-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="nav-number">5.6.5.</span> <span class="nav-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contains-Object-o"><span class="nav-number">5.6.6.</span> <span class="nav-text">contains(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-int-index"><span class="nav-number">5.6.7.</span> <span class="nav-text">get(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-int-index"><span class="nav-number">5.6.8.</span> <span class="nav-text">remove(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-Object-o"><span class="nav-number">5.6.9.</span> <span class="nav-text">remove(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeAll-Collection-lt-gt-c"><span class="nav-number">5.6.10.</span> <span class="nav-text">removeAll(Collection&lt;?&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeIf-Predicate-lt-super-E-gt-filter"><span class="nav-number">5.6.11.</span> <span class="nav-text">removeIf(Predicate&lt;? super E&gt; filter)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceAll-UnaryOperator-operator"><span class="nav-number">5.6.12.</span> <span class="nav-text">replaceAll(UnaryOperator operator)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set-int-index-E-element"><span class="nav-number">5.6.13.</span> <span class="nav-text">set(int index, E element)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort-Comparator-lt-super-E-gt-c"><span class="nav-number">5.6.14.</span> <span class="nav-text">sort(Comparator&lt;? super E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trimToSize"><span class="nav-number">5.6.15.</span> <span class="nav-text">trimToSize()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么ArrayList不能在for-each循环中删除元素"><span class="nav-number">6.</span> <span class="nav-text">为什么ArrayList不能在for-each循环中删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hasNext"><span class="nav-number">6.1.</span> <span class="nav-text">hasNext()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next"><span class="nav-number">6.2.</span> <span class="nav-text">next()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList简介"><span class="nav-number">2.</span> <span class="nav-text">ArrayList简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList类结构"><span class="nav-number">3.</span> <span class="nav-text">ArrayList类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList特点"><span class="nav-number">4.</span> <span class="nav-text">ArrayList特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList提供的API"><span class="nav-number">5.</span> <span class="nav-text">ArrayList提供的API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList源码"><span class="nav-number">6.</span> <span class="nav-text">ArrayList源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList常量属性"><span class="nav-number">6.1.</span> <span class="nav-text">ArrayList常量属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList成员变量"><span class="nav-number">6.2.</span> <span class="nav-text">ArrayList成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList内部类"><span class="nav-number">6.3.</span> <span class="nav-text">ArrayList内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayListSpliterator"><span class="nav-number">6.3.1.</span> <span class="nav-text">ArrayListSpliterator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList构造函数"><span class="nav-number">6.4.</span> <span class="nav-text">ArrayList构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList重要方法解析"><span class="nav-number">6.5.</span> <span class="nav-text">ArrayList重要方法解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#arraycopy-Object-src-int-srcPos-Object-dest-int-destPos-int-length"><span class="nav-number">6.5.1.</span> <span class="nav-text">arraycopy(Object src,  int  srcPos,  Object dest, int destPos,  int length)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-E-e"><span class="nav-number">6.5.2.</span> <span class="nav-text">add(E e)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-int-index-E-element"><span class="nav-number">6.5.3.</span> <span class="nav-text">add(int index, E element)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">6.5.4.</span> <span class="nav-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="nav-number">6.5.5.</span> <span class="nav-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contains-Object-o"><span class="nav-number">6.5.6.</span> <span class="nav-text">contains(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-int-index"><span class="nav-number">6.5.7.</span> <span class="nav-text">get(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-int-index"><span class="nav-number">6.5.8.</span> <span class="nav-text">remove(int index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-Object-o"><span class="nav-number">6.5.9.</span> <span class="nav-text">remove(Object o)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeAll-Collection-lt-gt-c"><span class="nav-number">6.5.10.</span> <span class="nav-text">removeAll(Collection&lt;?&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeIf-Predicate-lt-super-E-gt-filter"><span class="nav-number">6.5.11.</span> <span class="nav-text">removeIf(Predicate&lt;? super E&gt; filter)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceAll-UnaryOperator-operator"><span class="nav-number">6.5.12.</span> <span class="nav-text">replaceAll(UnaryOperator operator)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set-int-index-E-element"><span class="nav-number">6.5.13.</span> <span class="nav-text">set(int index, E element)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort-Comparator-lt-super-E-gt-c"><span class="nav-number">6.5.14.</span> <span class="nav-text">sort(Comparator&lt;? super E&gt; c)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trimToSize"><span class="nav-number">6.5.15.</span> <span class="nav-text">trimToSize()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么ArrayList不能在for-each循环中删除元素"><span class="nav-number">7.</span> <span class="nav-text">为什么ArrayList不能在for-each循环中删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hasNext"><span class="nav-number">7.1.</span> <span class="nav-text">hasNext()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next"><span class="nav-number">7.2.</span> <span class="nav-text">next()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1178,7 +1179,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 23.9k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 26.0k 字</i>
     </span>
 </div>
 
