@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[漏桶算法与令牌桶算法简介]]></title>
     <url>%2F2018%2F03%2F26%2F%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95%E4%B8%8E%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B%2F</url>
-    <content type="text"><![CDATA[前言我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。 漏桶算法]]></content>
+    <content type="text"><![CDATA[前言我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。 漏桶算法漏桶算法比较简单：首先有一个固定容量的漏桶，然后请求会先进入漏桶，漏桶会以一定的速率放出请求。如果请求进入漏桶的速率过大则会溢出，溢出部分请求会被丢弃。 示意图如下： ps：图片来源于网络，侵删。 令牌桶算法令牌桶算法：首先有一个存放了固定数量的令牌的桶，然后请求过来，会先从令牌桶中获取令牌，拿到令牌的请求会被处理。系统需要以一个恒定的速率向令牌桶中添加令牌，如果桶满时，新添加的令牌会被丢弃或拒绝；如果令牌桶中没有令牌，则拒绝服务或者阻塞。添加令牌的速率： 示意图如下： ps：图片来源于网络，侵删。 漏桶算法和令牌桶算法对比令牌桶算法限制的是平均流入速率，允许某种程度的突发传输，即只要有足够的令牌，支持一次拿2个令牌，3个令牌或者更多；而漏桶算法限制的是常量流出速率 ，即漏桶放出请求的速率是一个固定的常量值，不能这次是1，下次是2。 总结这篇文章主要是介绍了漏桶算法和令牌桶算法的原理，在项目中我们可以根据业务场景选择合适的限流算法。 欢迎关注博主其他的文章。]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -88,6 +88,18 @@
       <tags>
         <tag>Java</tag>
         <tag>Java8</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[synchronized关键字了解一下]]></title>
+    <url>%2F2017%2F03%2F16%2Fsynchronized%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B%2F</url>
+    <content type="text"><![CDATA[前言synchronized是我们在遇到多线程问题时，经常使用到的关键字。本文我们将深入了解synchronized。 synchronized 简介synchronized是一个重量级锁。相对于Lock来说，它会显得那么笨重。不过在Javs SE 1.6对synchronized进行的各种优化后，它的性能跟Lock差不多了。 synchronized 使用方法 分类 被锁对象 示例 实例方法 类的实例对象 // 实例方法，锁住的是该类的实例对象public synchronized void method(){ … } 静态方法 类对象 // 静态方法，锁住的是类对象public static synchronized void method(){ … } 实例对象 类的实例对象 // 同步代码块，锁住的是该类的实例对象synchronized)(this){ … } 类对象 类对象 // 同步代码块，锁住的是类对象synchronized)(Demo.class){ … } 任意实例对象 实例对象 // 同步代码块，锁住的是指定的实例对象// String作为锁的对象String flag = “”;synchronized)(flag){ … } synchronized 实现原理]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>synchronized</tag>
       </tags>
   </entry>
   <entry>

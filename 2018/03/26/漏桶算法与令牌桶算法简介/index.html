@@ -132,10 +132,13 @@
 <meta property="og:site_name" content="yoga&#39;s blog">
 <meta property="og:description" content="前言我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-19T05:38:09.008Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/%E7%AE%97%E6%B3%95/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/%E7%AE%97%E6%B3%95/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-06-13T17:20:32.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漏桶算法与令牌桶算法简介">
 <meta name="twitter:description" content="前言我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yoga0521/picture/master/%E7%AE%97%E6%B3%95/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
 
 
 
@@ -465,7 +468,7 @@
                       <i class="fa fa-pencil-square-o"></i>
                     </span>
                     <span class="post-meta-item-text">字数统计:</span>
-                    <span class="post-count">109</span>
+                    <span class="post-count">496</span>
                     
                   </span>
               
@@ -475,7 +478,7 @@
                       <i class="fa fa-clock-o"></i>
                     </span>
                     <span class="post-meta-item-text">阅读时长:</span>
-                    <span class="post-count">1min</span>
+                    <span class="post-count">2min</span>
                     
                   </span>
           <!--以上部分为：字数统计、阅读时长插入代码-->
@@ -513,7 +516,18 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们项目中的API接口都是有访问上限的，当访问频率或者并发量超过其承受范围时，我们就必须考虑限流来保证接口的可用性。防止非预期的请求对系统压力过大而引起的系统瘫痪。本篇文章会介绍限流算法中比较常见的漏桶算法和令牌桶算法。</p>
 <a id="more"></a>
-<h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2>
+<h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p>漏桶算法比较简单：首先有一个固定容量的漏桶，然后请求会先进入漏桶，漏桶会以一定的速率放出请求。如果请求进入漏桶的速率过大则会溢出，溢出部分请求会被丢弃。</p>
+<p>示意图如下：</p>
+<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/%E7%AE%97%E6%B3%95/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="漏桶算法示意图"></p>
+<p>ps：图片来源于网络，侵删。</p>
+<h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>令牌桶算法：首先有一个存放了固定数量的令牌的桶，然后请求过来，会先从令牌桶中获取令牌，拿到令牌的请求会被处理。系统需要以一个恒定的速率向令牌桶中添加令牌，如果桶满时，新添加的令牌会被丢弃或拒绝；如果令牌桶中没有令牌，则拒绝服务或者阻塞。添加令牌的速率：</p>
+<p>示意图如下：</p>
+<p><img src="https://raw.githubusercontent.com/yoga0521/picture/master/%E7%AE%97%E6%B3%95/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="令牌桶算法示意图"></p>
+<p>ps：图片来源于网络，侵删。</p>
+<h2 id="漏桶算法和令牌桶算法对比"><a href="#漏桶算法和令牌桶算法对比" class="headerlink" title="漏桶算法和令牌桶算法对比"></a>漏桶算法和令牌桶算法对比</h2><p>令牌桶算法限制的是平均流入速率，允许某种程度的突发传输，即只要有足够的令牌，支持一次拿2个令牌，3个令牌或者更多；而漏桶算法限制的是常量流出速率 ，即漏桶放出请求的速率是一个固定的常量值，不能这次是1，下次是2。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇文章主要是介绍了漏桶算法和令牌桶算法的原理，在项目中我们可以根据业务场景选择合适的限流算法。</p>
+<p>欢迎关注博主其他的文章。</p>
+
       
     </div>
 
@@ -577,7 +591,7 @@
   <p><span>本文标题:</span><a href="/2018/03/26/漏桶算法与令牌桶算法简介/">漏桶算法与令牌桶算法简介</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 yoga 的个人博客">yoga</a></p>
   <p><span>发布时间:</span>2018年03月26日 - 13:03</p>
-  <!-- <p><span>最后更新:</span>2018年05月19日 - 13:05</p> -->
+  <!-- <p><span>最后更新:</span>2018年06月14日 - 01:06</p> -->
   <p><span>原始链接:</span><a href="/2018/03/26/漏桶算法与令牌桶算法简介/" title="漏桶算法与令牌桶算法简介">https://yoga0521.github.io/2018/03/26/漏桶算法与令牌桶算法简介/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yoga0521.github.io/2018/03/26/漏桶算法与令牌桶算法简介/"  aria-label="复制成功！"></i></span>
   </p>
@@ -705,7 +719,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -767,7 +781,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -829,7 +845,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏桶算法"><span class="nav-number">2.</span> <span class="nav-text">漏桶算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏桶算法"><span class="nav-number">2.</span> <span class="nav-text">漏桶算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#令牌桶算法"><span class="nav-number">3.</span> <span class="nav-text">令牌桶算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏桶算法和令牌桶算法对比"><span class="nav-number">4.</span> <span class="nav-text">漏桶算法和令牌桶算法对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -898,7 +914,7 @@
     <span class="post-meta-divider">|</span>
   
     <span class="post-count">
-      <i class="fa fa-pencil-square-o">博客全站共 26.0k 字</i>
+      <i class="fa fa-pencil-square-o">博客全站共 26.7k 字</i>
     </span>
 </div>
 
